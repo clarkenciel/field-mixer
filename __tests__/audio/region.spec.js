@@ -1,5 +1,9 @@
 import Region from '../../src/audio_managers/region.js'
+import 'web-audio-test-api'
 
+WebAudioTestAPI.setState({
+  "AudioContext#createStereoPanner": "enabled",
+})
 const context = new AudioContext()
 const dummyBuffer = context.createBuffer(2, 44100, 44100)
 

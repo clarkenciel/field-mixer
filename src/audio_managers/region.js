@@ -6,14 +6,14 @@ const RegionData = {
 
   lengthMillis() { return this.buffer.length / (this.buffer.sampleRate * 0.001) },
 
-  lengthSeconds() { return this.buffer.length / this.buffer.sampleRate }
+  lengthSeconds() { return this.buffer.length / this.buffer.sampleRate },
 
   endMillis() { return (this.startTime * 1000) + this.lengthMillis() },
 
   endSeconds() { return this.startTime + this.lengthSeconds() },
 
   offset(offset) {
-    const nu = Object.clone(this)
+    const nu = Object.create(this)
     nu.startTime += offset
     return nu
   }
@@ -21,7 +21,7 @@ const RegionData = {
 
 export default {
   fromBuffer(audioBuffer) {
-    const nu = Object.clone(RegionData)
+    const nu = Object.create(RegionData)
     nu.buffer = audioBuffer
     return nu
   }

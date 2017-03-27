@@ -9,7 +9,8 @@
     "dev-build": "webpack --progress --config webpack.dev.js",
     "build": "webpack --progress -p --config webpack.prod.js",
     "dev": "NODE_ENV=develop node server.js",
-    "test": "jest"
+    "test": "jest",
+    "repl": "node"
   },
   "jest": {
     "transform": {
@@ -26,6 +27,7 @@
     "jest": "^19.0.2",
     "react": "^15.4.2",
     "react-test-renderer": "^15.4.2",
+    "web-audio-test-api": "^0.5.2",
     "webpack": "^2.3.1",
     "webpack-dev-middleware": "^1.10.1",
     "webpack-dev-server": "^2.4.2",
