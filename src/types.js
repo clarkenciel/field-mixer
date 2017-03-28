@@ -1,0 +1,18 @@
+const LIBRARY_EVENTS = {
+}
+
+const REGION_EVENTS = {
+}
+
+const TIMELINE_EVENTS = {
+}
+
+const MIXER_EVENTS = {
+}
+
+export default {
+  REGION_EVENTS,
+  TIMELINE_EVENTS,
+  MIXER_EVENTS,
+  LIBRARY_EVENTS
+}
