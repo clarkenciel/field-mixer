@@ -15,6 +15,8 @@ for (var chan = 0; chan < 2; chan++) {
 }
 
 describe('playing', () => {
+  beforeEach(() => context.$reset())
+
   it('can be stopped', () => {
     const chain = Chain(context)
     chain.initialize(dummyBuffer)
@@ -37,5 +39,24 @@ describe('playing', () => {
     chain.stop()
     chain.initialize(dummyBuffer)
     expect(chain.play.bind(chain)).not.toThrow()
+  })
+
+  it('uses existing buffer if initialized without buffer', () => {
+    const chain = Chain(context)
+    chain.initialize(dummyBuffer)
+    chain.initialize()
+    expect(chain.buffer).toBe(dummyBuffer)
+  })
+
+  it('can have a callback registered that accepts itself', done => {
+    const chain = Chain(context)
+    chain.initialize(dummyBuffer)
+    chain.onStop(c => {
+      expect(c).toBe(chain)
+      expect(c.setBuffer(dummyBuffer).play.bind(c)).not.toThrow()
+      done()
+    })
+    chain.play()
+    context.$processTo('00:00.500')
   })
 })
