@@ -1,12 +1,13 @@
 import 'web-audio-test-api'
 import Timeline from '../../src/audio_managers/relative_channel_timeline.js'
 import Region from '../../src/audio_managers/region.js'
+import context from '../../src/audio_context.js'
+
 
 WebAudioTestAPI.setState({
   "AudioContext#createStereoPanner": "enabled",
 })
 
-const context = new AudioContext()
 const dummyBuffer = context.createBuffer(2, 88200, 44100)
 for (var chan = 0; chan < 2; chan++) {
   const samps = dummyBuffer.getChannelData(chan)
@@ -49,14 +50,14 @@ describe('adding and removing regions', () => {
 
   it('inserts regions in appropriate order', () => {
     const startLen = tl.scheduledRegions().length
-    tl.insertAt(4, reg2)
+    tl.insertAt(0, reg2)
     tl.insertAt(0, reg)
-    tl.insertAt(10, reg)
+    tl.insertAt(1, reg)
     expect(tl.scheduledRegions().length).toBeGreaterThan(startLen)
     expect(tl.scheduledRegions().length).toEqual(3)
     expect(tl.scheduledRegions()[0].region).toBe(reg)
-    expect(tl.scheduledRegions()[1].region).toBe(reg2)
-    expect(tl.scheduledRegions()[2].region).toBe(reg)
+    expect(tl.scheduledRegions()[1].region).toBe(reg)
+    expect(tl.scheduledRegions()[2].region).toBe(reg2)
   })
 
   it('does shift other region start and end times', () => {

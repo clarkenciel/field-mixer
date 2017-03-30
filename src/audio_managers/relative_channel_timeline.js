@@ -30,7 +30,7 @@ RelativeTimeline.insertAt = function(idx, region) {
   }
   const start = this.getStartTimeAt(idx)
   const end = start + region.lengthMillis()
-  this._scheduledRegions = this._scheduledRegions.slice(0, idx - 1).
+  this._scheduledRegions = this._scheduledRegions.slice(0, idx).
     concat(ScheduledRegion(start, end, region)).
     concat(this._scheduledRegions.slice(idx))
   return this

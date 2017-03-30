@@ -1,11 +1,11 @@
 import 'web-audio-test-api'
 import Chain from '../../src/audio_managers/audio_chain.js'
+import context from '../../src/audio_context.js'
 
 WebAudioTestAPI.setState({
   "AudioContext#createStereoPanner": "enabled",
 })
 
-const context = new AudioContext()
 const dummyBuffer = context.createBuffer(2, 11025, 44100)
 for (var chan = 0; chan < 2; chan++) {
   const samps = dummyBuffer.getChannelData(chan)

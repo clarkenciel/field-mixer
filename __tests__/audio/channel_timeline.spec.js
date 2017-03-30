@@ -4,12 +4,13 @@ import 'web-audio-test-api'
 import Timeline from '../../src/audio_managers/channel_timeline.js'
 import Region from '../../src/audio_managers/region.js'
 import ScheduledRegion from '../../src/audio_managers/scheduled_region.js'
+import context from '../../src/audio_context.js'
+
 
 WebAudioTestAPI.setState({
   "AudioContext#createStereoPanner": "enabled",
 })
 
-const context = new AudioContext()
 const dummyBuffer = context.createBuffer(2, context.sampleRate * 2, context.sampleRate)
 for (var chan = 0; chan < 2; chan++) {
   const samps = dummyBuffer.getChannelData(chan)
