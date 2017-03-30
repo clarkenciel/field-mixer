@@ -36,7 +36,7 @@ const TimeLineTraits = {
     else {
       this._scheduledRegions.forEach((sr, idx) => {
         if (sr.start >= this._pausedAt)
-          this._playPlayer(idx, sr.start)
+          this._playPlayer(idx, sr)
       })
       this._pausedAt = null
     }

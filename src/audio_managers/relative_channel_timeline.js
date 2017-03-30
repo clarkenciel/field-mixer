@@ -78,5 +78,7 @@ RelativeTimeline.getStartTimeAt = function(idx) {
 export default (context) => {
   const out = Object.create(RelativeTimeline)
   out.context = context
+  out._players = []
+  out._scheduledRegions = []
   return out
 }

@@ -21,19 +21,19 @@ describe('MixerStore', () => {
   const reg4 = Region.fromBuffer(dummyBuf4)
   const runner = {}
 
+  runner.players = () => runner.state.timelines().
+    map((tl, idx) => tl.players().map(p => p.chain.playerNode))
+
+  runner.regions = () => runner.state.timelines().
+    map(tl => tl.scheduledRegions().map(sr => sr.region))
+
+  runner.scheduledRegions = () => runner.state.timelines().
+    map(tl => tl.scheduledRegions().map(sr => sr))
+
+  runner.dispatch = action => runner.state = MixerStore.reduce(runner.state, action)
+
   beforeEach(() => {
     runner.state = MixerStore.getInitialState()
-
-    runner.players = () => runner.state.timelines().
-      map((tl, idx) => tl.players().map(p => p.chain.playerNode))
-
-    runner.regions = () => runner.state.timelines().
-      map(tl => tl.scheduledRegions().map(sr => sr.region))
-
-    runner.scheduledRegions = () => runner.state.timelines().
-      map(tl => tl.scheduledRegions().map(sr => sr))
-
-    runner.dispatch = action => runner.state = MixerStore.reduce(runner.state, action)
   })
 
   describe('region addition', () => {
@@ -113,6 +113,55 @@ describe('MixerStore', () => {
   })
 
   describe('playback', () => {
+    runner.playStatuses = () =>
+      runner.players().
+        map(playerArr => playerArr.map(node => node.$state))
+
+    beforeEach(() => {
+      context.$reset
+      runner.state = MixerStore.getInitialState()
+      runner.dispatch(Mac.appendRegion(0, reg1))
+      runner.dispatch(Mac.appendRegion(0, reg2))
+
+      runner.dispatch(Mac.appendRegion(1, reg1))
+      runner.dispatch(Mac.appendRegion(1, reg2))
+
+      runner.dispatch(Mac.appendRegion(2, reg1))
+      runner.dispatch(Mac.appendRegion(2, reg2))
+
+      runner.dispatch(Mac.appendRegion(3, reg1))
+      runner.dispatch(Mac.appendRegion(3, reg2))
+      runner.dispatch(Mac.play())
+    })
+
+    it('plays the first region of each track', () => {
+      expect(runner.playStatuses().map(tl => tl[0])).toEqual([
+        'PLAYING',
+        'PLAYING',
+        'PLAYING',
+        'PLAYING'
+      ])
+    })
+
+    it('schedules future regions of each track', () => {
+      expect(runner.playStatuses().map(tl => tl[1])).toEqual([
+        'SCHEDULED',
+        'SCHEDULED',
+        'SCHEDULED',
+        'SCHEDULED'
+      ])
+    })
+
+    it('stops all regions for each track', () => {
+      runner.dispatch(Mac.stop())
+      expect(runner.playStatuses().map(tl => tl)).toEqual([
+        ['UNSCHEDULED', 'UNSCHEDULED'],
+        ['UNSCHEDULED', 'UNSCHEDULED'],
+        ['UNSCHEDULED', 'UNSCHEDULED'],
+        ['UNSCHEDULED', 'UNSCHEDULED']
+      ])
+    })
+
     describe('pausing/resuming', () => {
     })
   })

@@ -41,7 +41,7 @@ class MixerStore extends ReduceStore {
         return Object.create(mixer)
 
       case Mat.POP_REGION:
-         tl = mixer.timeline(action.tlIdx)
+        tl = mixer.timeline(action.tlIdx)
         tl.removeAt(tl.scheduledRegions().length - 1)
         return Object.create(mixer)
 
@@ -50,8 +50,18 @@ class MixerStore extends ReduceStore {
         return Object.create(mixer)
 
       case Mat.REMOVE_REGION:
-         tl = mixer.timeline(action.tlIdx)
+        tl = mixer.timeline(action.tlIdx)
         tl.removeAt(action.regIdx)
+        return Object.create(mixer)
+
+      case Mat.PLAY:
+        mixer.timelines().forEach((tl, idx) => {
+          tl.play()
+        })
+        return Object.create(mixer)
+
+      case Mat.STOP:
+        mixer.timelines().forEach(tl => tl.stop())
         return Object.create(mixer)
 
       default:
