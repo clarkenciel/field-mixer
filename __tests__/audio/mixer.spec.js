@@ -34,8 +34,8 @@ describe('timeline management', () => {
 
       expect(endLen).toBeGreaterThan(startLen)
       expect(endLen).toEqual(2)
-      expect(mixer.timelines()[0]).toBe(tl1)
-      expect(mixer.timelines()[1]).toBe(tl2)
+      expect(mixer.timeline(0)).toBe(tl1)
+      expect(mixer.timeline(1)).toBe(tl2)
     })
 
     it('prepends', () => {
@@ -46,15 +46,15 @@ describe('timeline management', () => {
 
       expect(endLen).toBeGreaterThan(startLen)
       expect(endLen).toEqual(2)
-      expect(mixer.timelines()[1]).toBe(tl1)
-      expect(mixer.timelines()[0]).toBe(tl2)
+      expect(mixer.timeline(1)).toBe(tl1)
+      expect(mixer.timeline(0)).toBe(tl2)
     })
 
     describe('insertion', () => {
       let startLen, endLen, tl1, tl2, tl3
       beforeEach(() => {
-        tl1 = mixer.append(RelativeTimeline)
-        tl2 = mixer.append(RelativeTimeline)
+        tl1 = mixer.appendTimeline(RelativeTimeline)
+        tl2 = mixer.appendTimeline(RelativeTimeline)
         startLen = mixer.size()
       })
 
@@ -67,26 +67,26 @@ describe('timeline management', () => {
         const tl3 = mixer.insertTimeline(0, RelativeTimeline)
         endLen = mixer.size()
         expect(startLen).toBeLessThan(endLen)
-        expect(mixer.timelines()[0]).toBe(tl3)
-        expect(mixer.timelines()[1]).toBe(tl1)
-        expect(mixer.timelines()[2]).toBe(tl2)
+        expect(mixer.timeline(0)).toBe(tl3)
+        expect(mixer.timeline(1)).toBe(tl1)
+        expect(mixer.timeline(2)).toBe(tl2)
       })
 
       it('inserts at tail if index is too high', () => {
         const tl3 = mixer.insertTimeline(2, RelativeTimeline)
         endLen = mixer.size()
         expect(startLen).toBeLessThan(endLen)
-        expect(mixer.timelines()[0]).toBe(tl1)
-        expect(mixer.timelines()[1]).toBe(tl2)
-        expect(mixer.timelines()[2]).toBe(tl3)
+        expect(mixer.timeline(0)).toBe(tl1)
+        expect(mixer.timeline(1)).toBe(tl2)
+        expect(mixer.timeline(2)).toBe(tl3)
       })
 
       it('inserts at head if index is too low', () => {
         const tl3 = mixer.insertTimeline(-1, RelativeTimeline)
         endLen = mixer.size()
-        expect(mixer.timelines()[0]).toBe(tl3)
-        expect(mixer.timelines()[1]).toBe(tl1)
-        expect(mixer.timelines()[2]).toBe(tl2)
+        expect(mixer.timeline(0)).toBe(tl3)
+        expect(mixer.timeline(1)).toBe(tl1)
+        expect(mixer.timeline(2)).toBe(tl2)
       })
     })
   })
@@ -120,7 +120,7 @@ describe('timeline management', () => {
 
     describe('shifting', () => {
       beforeEach(() => {
-        tl3 = matrix.shiftTimeline()
+        tl3 = mixer.shiftTimeline()
       })
 
       it('reduces the size of the mixer', () => {
@@ -128,12 +128,12 @@ describe('timeline management', () => {
         expect(endLen).toBeLessThan(startLen)
       })
 
-      it('returns the last timeline in the mixer', () => {
-        expect(tl3).toBe(tl2)
+      it('returns the first timeline in the mixer', () => {
+        expect(tl3).toBe(tl1)
       })
 
-      it('leaves the preceding elements untouched', () => {
-        expect(mixer.timeline(0)).toBe(tl1)
+      it('leaves the following elements untouched', () => {
+        expect(mixer.timeline(0)).toBe(tl2)
       })
     })
 
@@ -142,7 +142,7 @@ describe('timeline management', () => {
       beforeEach(() => {
         tl4 = mixer.appendTimeline(RelativeTimeline)
         startLen = mixer.size()
-        tl3 = matrix.removeTimelineAt(1)
+        tl3 = mixer.removeTimelineAt(1)
       })
 
       it('reduces the size of the mixer', () => {
