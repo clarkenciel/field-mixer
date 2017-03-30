@@ -5,6 +5,8 @@ const ChainData = {
   buffer: null,
   playerNode: null,
   onstop: null,
+  onstart: null,
+  playing: null,
 
   initialize(buffer) {
     if (this.playerNode) this.playerNode.disconnect()
@@ -12,6 +14,7 @@ const ChainData = {
     this.playerNode = this.context.createBufferSource()
     this.playerNode.buffer = this.buffer
     this.playerNode.connect(this.gain)
+    this.playing = null
     this.playerNode.onended = _ => {
       if (this.onstop) this.onstop(this)
       else this.initialize()
@@ -19,13 +22,18 @@ const ChainData = {
     return this
   },
 
-  play(delay, offset) {
-    this.playerNode.start(delay || 0, offset || 0)
+  play(delay) {
+    if (this.onstart) {
+      setTimeout(this.onstart.bind(this), delay * 1000)
+    }
+    this.playerNode.start(delay || 0)
+    this.playing = true
     return this
   },
 
   stop() {
-    this.playerNode.stop()
+    if (this.playing)
+      this.playerNode.stop()
     return this.initialize()
   },
 
@@ -45,8 +53,17 @@ const ChainData = {
     return this
   },
 
-  onStop(f) {
+  onStart(f) {
+    this.onstart = f
+    return this
+  },
+
+  onEnd(f) {
     this.onstop = f
+    this.playerNode.onended = _ => {
+      if (this.onstop) this.onstop(this)
+      else this.initialize()
+    }
     return this
   }
 }

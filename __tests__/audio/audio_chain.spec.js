@@ -24,6 +24,29 @@ describe('playing', () => {
     expect(chain.stop.bind(chain)).not.toThrow()
   })
 
+  it('resets to unscheduled on stop', () => {
+    const chain = Chain(context)
+    chain.initialize(dummyBuffer)
+    chain.play()
+    chain.stop()
+    expect(chain.playerNode.$state).toBe('UNSCHEDULED')
+  })
+
+  it('can be scheduled', () => {
+    const chain = Chain(context)
+    chain.initialize(dummyBuffer)
+    chain.play(2000)
+    expect(chain.playerNode.$state).toBe('SCHEDULED')
+  })
+
+  it('moves to UNSCHEDULED when it finisheds playing', () => {
+    const chain = Chain(context)
+    chain.initialize(dummyBuffer)
+    chain.play()
+    context.$processTo('00:02.000')
+    expect(chain.playerNode.$state).toBe('UNSCHEDULED')
+  })
+
   it('can be restarted immediately after stopping', () => {
     const chain = Chain(context)
     chain.initialize(dummyBuffer)
@@ -51,7 +74,7 @@ describe('playing', () => {
   it('can have a callback registered that accepts itself', done => {
     const chain = Chain(context)
     chain.initialize(dummyBuffer)
-    chain.onStop(c => {
+    chain.onEnd(c => {
       expect(c).toBe(chain)
       expect(c.setBuffer(dummyBuffer).play.bind(c)).not.toThrow()
       done()

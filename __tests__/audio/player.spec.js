@@ -20,7 +20,7 @@ describe('state machine operation', () => {
   var player
 
   beforeEach(() => {
-    player = Player(context, reg)
+    player = Player(context, reg.buffer)
   })
 
   it('starts fresh', () => {

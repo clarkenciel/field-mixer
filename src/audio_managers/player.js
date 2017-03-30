@@ -2,29 +2,41 @@ import Chain from './audio_chain.js'
 
 const PlayerData = {
   chain: null,
-  region: null,
+  buffer: null,
   initialized: false,
   playing: false,
 
   copyData(other) {
-    other.region = this.region
+    other.buffer = this.buffer
     other.chain = this.chain
   },
 
   setGain(val) {
-    chain.setGain(val)
+    this.chain.setGain(val)
   },
 
   setPan(val) {
-    chain.setGain(val)
+    this.chain.setGain(val)
+  },
+
+  onStart(f) {
+    this.chain.onStart(() => {
+      f(this)
+    })
+  },
+
+  onEnd(f) {
+    this.chain.onEnd(chain => {
+      f(this)
+    })
   }
 }
 
 const PlayerCreator = Object.create(PlayerData)
-PlayerCreator.create = function(context, region) {
+PlayerCreator.create = function(context, buffer) {
   const nu = Object.create(FreshPlayer)
-  nu.region = region
   nu.chain = Chain(context)
+  nu.buffer = buffer
   return nu
 }
 
@@ -32,7 +44,7 @@ const FreshPlayer = Object.create(PlayerData)
 FreshPlayer.initialize = function() {
   const nu = Object.create(InitializedPlayer)
   this.copyData(nu)
-  nu.chain.initialize(nu.region.buffer)
+  nu.chain.initialize(nu.buffer)
   return nu
 }
 
@@ -42,7 +54,7 @@ InitializedPlayer.initialized = true
 InitializedPlayer.play = function(delay, offset) {
   const nu = Object.create(PlayingPlayer)
   this.copyData(nu)
-  nu.chain.play((offset || 0) + nu.region.startTime, offset)
+  nu.chain.play(delay || 0, offset)
   nu.initialized = this.initialized
   return nu
 }
@@ -57,6 +69,6 @@ PlayingPlayer.stop = function() {
   return nu.initialize()
 }
 
-const player = (context, region) => PlayerCreator.create(context, region)
+const player = (context, buffer) => PlayerCreator.create(context, buffer)
 
 export default player

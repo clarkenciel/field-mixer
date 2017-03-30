@@ -16,10 +16,16 @@ for (var chan = 0; chan < 2; chan++) {
 }
 
 describe('region adding', () => {
+  it('adds regions to appropriate timeline', () => {
+  })
 })
 
 describe('region deletion', () => {
+  it('only removes regions from specified timeline', () => {
+  })
 })
 
 describe('playback', () => {
+  it('schedules all timelines', () => {
+  })
 })
