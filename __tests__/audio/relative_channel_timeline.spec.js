@@ -23,27 +23,20 @@ describe('adding and removing regions', () => {
     reg2 = Region.fromBuffer(dummyBuffer)
   })
 
-  it('accepts regions with millis timestamps', () => {
-    expect(tl.acceptsRegionAt(10, reg)).toBe(true)
+  it('accepts regions with indices', () => {
+    expect(tl.acceptsAt(10, reg)).toBe(true)
     tl.insertAt(10, reg)
-    expect(tl.acceptsRegionAt(0, reg)).toBe(true)
-    expect(tl.acceptsRegionAt(12, reg)).toBe(true)
+    expect(tl.acceptsAt(0, reg)).toBe(true)
+    expect(tl.acceptsAt(12, reg)).toBe(true)
   })
 
-  it('does not accept region overlaps', () => {
-    tl.insertAt(10, reg)
-    expect(tl.acceptsRegionAt(10, reg)).toBe(false)
-    expect(tl.acceptsRegionAt(9, reg)).toBe(false)
-    expect(tl.acceptsRegionAt(11, reg)).toBe(false)
-  })
-
-  it('accepts removal of region given any pos within region dur', () => {
+  it('accepts removal of region if it is valid index', () => {
     tl.insertAt(0, reg)
     expect(tl.acceptsRemovalAt(0)).toBe(true)
-    expect(tl.acceptsRemovalAt(1)).toBe(true)
+    expect(tl.acceptsRemovalAt(1)).toBe(false)
   })
 
-  it('rejects removal if there is no region at time', () => {
+  it('rejects removal if there is no region at index', () => {
     tl.insertAt(0, reg)
     expect(tl.acceptsRemovalAt(2)).toBe(false)
   })
@@ -61,32 +54,41 @@ describe('adding and removing regions', () => {
     tl.insertAt(10, reg)
     expect(tl.scheduledRegions().length).toBeGreaterThan(startLen)
     expect(tl.scheduledRegions().length).toEqual(3)
-    expect(tl.scheduledRegions()[0].start).toEqual(0)
-    expect(tl.scheduledRegions()[1].start).toEqual(4)
-    expect(tl.scheduledRegions()[2].start).toEqual(10)
+    expect(tl.scheduledRegions()[0].region).toBe(reg)
+    expect(tl.scheduledRegions()[1].region).toBe(reg2)
+    expect(tl.scheduledRegions()[2].region).toBe(reg)
   })
 
-  it('does not move other regions on insertion', () => {
+  it('does shift other region start and end times', () => {
     tl.insertAt(4, reg2)
     tl.insertAt(0, reg)
-    expect(tl.scheduledRegions()[1].start).toEqual(4)
-    expect(tl.scheduledRegions()[1].region).toBe(reg2)
+    tl.insertAt(10, reg)
+    expect(tl.scheduledRegions()[0].start).toEqual(0)
+    expect(tl.scheduledRegions()[0].end).toEqual(2000)
+    expect(tl.scheduledRegions()[1].start).toEqual(2000)
+    expect(tl.scheduledRegions()[1].end).toEqual(4000)
+    expect(tl.scheduledRegions()[2].start).toEqual(4000)
+    expect(tl.scheduledRegions()[2].end).toEqual(6000)
   })
 
   it('moves remaining onset indices left on removal', () => {
     tl.insertAt(0, reg)
     tl.insertAt(4, reg2)
     const startLen = tl.scheduledRegions().length
-    tl.removeAt(1)
-    expect(tl.scheduledRegions().length).toBeLessThan(startLne)
+    tl.removeAt(0)
+    expect(tl.scheduledRegions().length).toBeLessThan(startLen)
     expect(tl.scheduledRegions().length).toEqual(1)
     expect(tl.scheduledRegions()[0].region).toBe(reg2)
   })
 
-  it('does not move other regions onsets on removal', () => {
+  it('does move other regions onsets on removal', () => {
     tl.insertAt(0, reg)
     tl.insertAt(4, reg2)
+    const scROne = tl.scheduledRegions()[1]
     tl.removeAt(1)
-    expect(tl.scheduledRegions()[0].start).toEqual(4)
+    const scRTwo = tl.scheduledRegions()[0]
+    expect(scRTwo.region).toEqual(scROne.region)
+    expect(scRTwo.start).toEqual(scROne.start - reg.lengthMillis())
+    expect(scRTwo.end).toEqual(scROne.end - reg.lengthMillis())
   })
 })

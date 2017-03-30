@@ -26,10 +26,11 @@ RelativeTimeline.insertAt = function(idx, region) {
   if (existing) {
     const existingNewStart = existing.start + region.lengthMillis()
     existing.start = existingNewStart
+    existing.end = existing.start + existing.region.lengthMillis()
   }
   const start = this.getStartTimeAt(idx)
   const end = start + region.lengthMillis()
-  this._onsets = this._scheduledRegions.slice(0, idx - 1).
+  this._scheduledRegions = this._scheduledRegions.slice(0, idx - 1).
     concat(ScheduledRegion(start, end, region)).
     concat(this._scheduledRegions.slice(idx))
   return this
@@ -54,15 +55,20 @@ RelativeTimeline.removeAt = function(idx) {
 }
 
 RelativeTimeline.acceptsAt = function(idx, region) {
+  return true
 }
 
 RelativeTimeline.acceptsRemovalAt = function(idx) {
+  return idx >= 0 && idx < this._scheduledRegions.length
 }
 
 RelativeTimeline.getStartTimeAt = function(idx) {
   const prior = this._scheduledRegions[idx-1]
   if (prior) {
     return prior.end
+  }
+  else if (idx > this._scheduledRegions.length) {
+    return this.getStartTimeAt(this._scheduledRegions.length)
   }
   else {
     return 0
