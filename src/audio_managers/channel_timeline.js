@@ -34,7 +34,9 @@ const TimeLineTraits = {
     if (!this._pausedAt)
       this.play()
     else {
+      // console.log('timeline resume', this._pausedAt)
       this._scheduledRegions.forEach((sr, idx) => {
+        // console.log('timeline resume > region start', sr.start)
         if (sr.start >= this._pausedAt)
           this._playPlayer(idx, sr)
       })

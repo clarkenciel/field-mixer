@@ -26,7 +26,7 @@ const ChainData = {
     if (this.onstart) {
       setTimeout(this.onstart.bind(this), delay * 1000)
     }
-    this.playerNode.start(delay || 0)
+    this.playerNode.start(this.context.currentTime + (delay || 0))
     this.playing = true
     return this
   },

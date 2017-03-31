@@ -40,7 +40,32 @@ const MixerData = {
     this._timelines = this._timelines.slice(0, idx).
       concat(this._timelines.slice(idx + 1))
     return out
-  }
+  },
+
+  play() {
+    this._startTime = this.context.currentTime * 1000
+    this._timeAtResume = this._startTime
+    this._runTime = 0
+    this._timelines.forEach(tl => tl.play(this._startTime))
+  },
+
+  stop() {
+    this._timelines.forEach(tl => tl.stop())
+  },
+
+  pause() {
+    // console.log('mixer pause', this._pauseTime, this._timeAtResume, this.context.currentTime * 1000)
+    this._pauseTime = (this.context.currentTime * 1000) - this._timeAtResume
+    this._runTime += this._pauseTime - this._startTime
+    this._timelines.forEach(tl => tl.pause(this._pauseTime))
+  },
+
+  resume() {
+    // console.log('mixer resume 1', this._timeAtResume)
+    this._timeAtResume = this.context.currentTime * 1000
+    // console.log('mixer resume 2', this._timeAtResume)
+    this._timelines.forEach(tl => tl.resume())
+  },
 }
 
 export default context => {

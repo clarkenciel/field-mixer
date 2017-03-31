@@ -62,7 +62,7 @@ describe('playback', () => {
     beforeEach(() => {
       context.$reset()
       tl = Timeline(context)
-      reg = Region.fromBuffer(shortBuffer)
+      reg  = Region.fromBuffer(shortBuffer)
       reg2 = Region.fromBuffer(shortBuffer)
       const len1 = reg.lengthMillis()
 
@@ -142,9 +142,9 @@ describe('playback', () => {
       tl.pause(context.currentTime * 1000)
       tl.resume()
       expect(tl.players()[0].chain.playerNode.$state).toBe('UNSCHEDULED')
-      expect(tl.players()[1].chain.playerNode.$state).toBe('FINISHED')
+      expect(tl.players()[1].chain.playerNode.$state).toBe('SCHEDULED')
       context.$processTo('00:05.000')
-      expect(tl.players()[1].chain.playerNode.$state).toBe('UNSCHEDULED')
+      expect(tl.players()[1].chain.playerNode.$state).toBe('PLAYING')
     })
   })
 })

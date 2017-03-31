@@ -11,10 +11,11 @@ WebAudioTestAPI.setState({
 })
 
 describe('MixerStore', () => {
-  const dummyBuf1 = context.createBuffer(2, 11025, context.sampleRate)
-  const dummyBuf2 = context.createBuffer(2, 22050, context.sampleRate)
-  const dummyBuf3 = context.createBuffer(2, 44100, context.sampleRate)
-  const dummyBuf4 = context.createBuffer(2, 88200, context.sampleRate)
+  const dummyBuf1 = context.createBuffer(2, 11025, context.sampleRate) // 0.25 sec
+  const dummyBuf2 = context.createBuffer(2, 22050, context.sampleRate) // 0.50 sec
+  const dummyBuf3 = context.createBuffer(2, 44100, context.sampleRate) // 1.00 sec
+  const dummyBuf4 = context.createBuffer(2, 88200, context.sampleRate) // 2.00 sec
+                                                                       // 3.75 sec
   const reg1 = Region.fromBuffer(dummyBuf1)
   const reg2 = Region.fromBuffer(dummyBuf2)
   const reg3 = Region.fromBuffer(dummyBuf3)
@@ -163,6 +164,54 @@ describe('MixerStore', () => {
     })
 
     describe('pausing/resuming', () => {
+      it('pauses all players', () => {
+        context.$processTo('00:00.010')
+        runner.dispatch(Mac.pause())
+        expect(runner.playStatuses().map(tl => tl)).toEqual([
+          ['UNSCHEDULED', 'UNSCHEDULED'],
+          ['UNSCHEDULED', 'UNSCHEDULED'],
+          ['UNSCHEDULED', 'UNSCHEDULED'],
+          ['UNSCHEDULED', 'UNSCHEDULED']
+        ])
+      })
+
+      it('resumes all players scheduled after the pause point', () => {
+        context.$processTo('00:00.300')
+        expect(runner.playStatuses().map(tl => tl)).toEqual([
+          ['UNSCHEDULED', 'PLAYING'],
+          ['UNSCHEDULED', 'PLAYING'],
+          ['UNSCHEDULED', 'PLAYING'],
+          ['UNSCHEDULED', 'PLAYING']
+        ])
+
+        runner.dispatch(Mac.pause())
+
+        expect(runner.playStatuses().map(tl => tl)).toEqual([
+          ['UNSCHEDULED', 'UNSCHEDULED'],
+          ['UNSCHEDULED', 'UNSCHEDULED'],
+          ['UNSCHEDULED', 'UNSCHEDULED'],
+          ['UNSCHEDULED', 'UNSCHEDULED']
+        ])
+
+        context.$processTo('00:02.000')
+
+        expect(runner.playStatuses().map(tl => tl)).toEqual([
+          ['UNSCHEDULED', 'UNSCHEDULED'],
+          ['UNSCHEDULED', 'UNSCHEDULED'],
+          ['UNSCHEDULED', 'UNSCHEDULED'],
+          ['UNSCHEDULED', 'UNSCHEDULED']
+        ])
+
+        console.log('final test')
+        runner.dispatch(Mac.resume())
+        context.$processTo('00:02.250')
+        expect(runner.playStatuses().map(tl => tl)).toEqual([
+          ['UNSCHEDULED', 'PLAYING'],
+          ['UNSCHEDULED', 'PLAYING'],
+          ['UNSCHEDULED', 'PLAYING'],
+          ['UNSCHEDULED', 'PLAYING']
+        ])
+      })
     })
   })
 })

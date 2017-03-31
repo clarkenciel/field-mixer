@@ -36,7 +36,14 @@ RelativeTimeline.insertAt = function(idx, region) {
   return this
 }
 
-// TODO; finish
+RelativeTimeline.appendRegion = function(region) {
+  return this.insertAt(this._scheduledRegions.length, region)
+}
+
+RelativeTimeline.prependRegion = function(region) {
+  return this.insertAt(0, region)
+}
+
 RelativeTimeline.removeAt = function(idx) {
   const removed = this._scheduledRegions[idx]
   if (removed) {
@@ -52,6 +59,16 @@ RelativeTimeline.removeAt = function(idx) {
   this._scheduledRegions = this._scheduledRegions.slice(0, idx).
     concat(this._scheduledRegions.slice(idx + 1))
   return this
+}
+
+RelativeTimeline.popRegion = function() {
+  const out = this._scheduledRegions.pop()
+  return out
+}
+
+RelativeTimeline.shiftRegion = function() {
+  const out = this._scheduledRegions.shift()
+  return out
 }
 
 RelativeTimeline.acceptsAt = function(idx, region) {

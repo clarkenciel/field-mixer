@@ -19,9 +19,10 @@ for (let chan = 0; chan < 2; chan++) {
   }
 }
 
+const [reg1, reg2, reg3] = Array(3).fill(null).map(_ => Region.fromBuffer(dummyBuffer))
+
 describe('timeline management', () => {
   let mixer
-  let [reg1, reg2, reg3] = Array(3).fill(null).map(_ => Region.fromBuffer(dummyBuffer))
   beforeEach(() => {
     mixer = Mixer(context)
   })
@@ -163,42 +164,76 @@ describe('timeline management', () => {
   })
 })
 
-// describe('playback', () => {
-//   let mixer, tl1, tl2
-//   beforeEach(() => {
-//     mixer = Mixer(context)
-//     tl1 = mixer.appendTimeline(RelativeTimeline)
-//     tl2 = mixer.appendTimeline(RelativeTimeline)
-//     mixer.play()
-//   })
+describe('playback', () => {
+  let mixer, tl1, tl2
 
-//   it('schedules all timelines', () => {
-//     mixer.timelines().forEach(tl => {
-//       expect(tl.isPlaying()).toBe(true)
-//     })
-//   })
+  const players = () =>
+    mixer.timelines().map(tl => tl.players())
 
-//   it('stops all timelines', () => {
-//     mixer.stop()
-//     mixer.timelines().forEach(tl => {
-//       expect(tl.isPlaying()).toBe(false)
-//       expect(tl.isStopped()).toBe(true)
-//     })
-//   })
+  const playerStatuses = () =>
+    players().map(playerArray =>
+      playerArray.map(player => player.chain.playerNode.$state))
 
-//   describe('pausing/resuming', () => {
-//     beforeEach(() => {
-//       mixer.pause(1000)
-//     })
+  beforeEach(() => {
+    context.$reset
+    mixer = Mixer(context)
+    tl1 = mixer.appendTimeline(RelativeTimeline)
+    tl2 = mixer.appendTimeline(RelativeTimeline)
+    tl1.appendRegion(reg1)
+    tl1.appendRegion(reg2)
+    tl2.appendRegion(reg1)
+    tl2.appendRegion(reg2)
 
-//     it('pauses all timelines', () => {
-//       mixer.timelines().forEach(tl => {
-//         expect(tl.isPlaying()).toBe(false)
-//         expect
-//       })
-//     })
+    mixer.play()
+  })
 
-//     it('resumes all timelines', () => {
-//     })
-//   })
-// })
+  it('schedules all timelines', () => {
+    expect(playerStatuses()).toEqual([
+      ['PLAYING','SCHEDULED'],
+      ['PLAYING','SCHEDULED']
+    ])
+  })
+
+  it('plays through timelines', () => {
+    context.$processTo('00:02.000')
+    expect(playerStatuses()).toEqual([
+      ['UNSCHEDULED','PLAYING'],
+      ['UNSCHEDULED','PLAYING']
+    ])
+  })
+
+  it('stops all timelines', () => {
+    mixer.stop()
+    expect(playerStatuses()).toEqual([
+      ['UNSCHEDULED','UNSCHEDULED'],
+      ['UNSCHEDULED','UNSCHEDULED']
+    ])
+  })
+
+  describe('pausing/resuming', () => {
+    beforeEach(() => {
+      context.$processTo('00:01.000')
+      mixer.pause(1000)
+    })
+
+    it('pauses all timelines', () => {
+      expect(playerStatuses()).toEqual([
+        ['UNSCHEDULED','UNSCHEDULED'],
+        ['UNSCHEDULED','UNSCHEDULED']
+      ])
+    })
+
+    it('resumes all timelines', () => {
+      mixer.resume()
+      expect(playerStatuses()).toEqual([
+        ['UNSCHEDULED','SCHEDULED'],
+        ['UNSCHEDULED','SCHEDULED']
+      ])
+      context.$processTo('00:03.000')
+      expect(playerStatuses()).toEqual([
+        ['UNSCHEDULED','PLAYING'],
+        ['UNSCHEDULED','PLAYING']
+      ])
+    })
+  })
+})
