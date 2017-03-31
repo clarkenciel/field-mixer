@@ -57,7 +57,6 @@ class MixerStore extends ReduceStore {
 
       case Mat.STOP:
         mixer.stop()
-        mixer.timelines().forEach(tl => tl.stop())
         return Object.create(mixer)
 
       case Mat.PAUSE:
