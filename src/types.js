@@ -11,6 +11,11 @@ const MixerActionTypes = {
   RESUME: 'mixer/resume',
 }
 
+const LibraryActionTypes = {
+  ADD_ITEM: 'library/add-item'
+}
+
 export {
-  MixerActionTypes
+  MixerActionTypes,
+  LibraryActionTypes
 }
