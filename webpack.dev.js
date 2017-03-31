@@ -8,7 +8,7 @@ const publicDir = path.join(here, 'build')
 
 module.exports = {
   entry: [
-    path.join(srcDir, 'index.js')
+    path.join(srcDir, 'index.jsx')
   ],
 
   output: {
@@ -19,9 +19,9 @@ module.exports = {
 
   module: {
     rules: [{
-      test: /\.js(x)$/i,
+      test: /\.jsx?$/i,
       exclude: /node_modules/,
-      use: { 
+      use: {
         loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015']
