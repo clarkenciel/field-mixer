@@ -3,20 +3,16 @@
 import React from 'react'
 import { render } from 'react-dom'
 import context from './audio_context.js'
-import Region from './audio_managers/region.js'
 import Library from './components/sample_library/library.jsx'
-
-const regions = Array(4).fill(null).
-  map(_ =>({
-    fileName: 'x.wav',
-    region: Region.fromBuffer(
-      context.createBuffer(2, 44100, context.sampleRate))
-  }))
+import Controls from './components/mixer/timeline_control_panel.jsx'
+import Timeline from './components/mixer/timeline.jsx'
 
 render(
-  <Library
-    regions={ regions }
-    columnWidth={ null }
+  <Timeline
+    pan={ 0.0 }
+    gain={ 0.5 }
+    currentlyPlayingRegion={ 1 }
+    regions={ [{ fileName: 'dogs.wav' }, { fileName: 'cats.wav' }] }
   />,
   document.getElementById('mixer')
 )
