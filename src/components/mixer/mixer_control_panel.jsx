@@ -6,7 +6,8 @@ import Pause from './pause_button.jsx'
 
 const mixerStyle = props => ({
   width: '100%',
-  backgroundColor: '#aaaaaa',
+  backgroundColor: props.playing ? '#eaeaaa' : '#aaeaaa',
+  paddingTop: '10px'
 })
 
 const buttonHolderStyle = props => ({
@@ -21,7 +22,7 @@ export default function(props) {
     <Play length={ buttonLen } />
 
   return (
-    <div id='mixer-controls' style={ mixerStyle() }>
+    <div id='mixer-controls' style={ mixerStyle(props) }>
       <div id='button-holder' style={ buttonHolderStyle({ width: buttonLen }) } >
         { button }
       </div>

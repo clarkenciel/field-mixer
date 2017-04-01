@@ -8,7 +8,7 @@ const holderStyle = ({ width }) => ({
 
 const sliderStyle = (props) => ({
   // const base = sharedStyle(props)
-  width: '100%',
+  // width: '100%',
   outline: 'none',
   cursor: 'pointer',
   color: 'transparent',

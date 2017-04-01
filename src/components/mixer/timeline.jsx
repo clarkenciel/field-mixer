@@ -4,13 +4,24 @@ import React from 'react'
 import Controls from './timeline_control_panel.jsx'
 import RegionList from './region_list.jsx'
 
-const tlStyle = props => ({
+const style = props => ({
+  margin: 0,
+  marginLeft: '3px',
+  padding: 0,
+  paddingLeft: '1px',
+  paddingRight: '1px',
+  width: props.width
 })
 
 export default function(props) {
   return (
-    <div className='timeline'>
-      <div className='controls-holder'>
+    <div
+      className='timeline'
+      style={ style(props) }
+    >
+      <div
+        className='controls-holder'
+      >
         <Controls
           gain={ props.gain }
           pan={ props.pan }
