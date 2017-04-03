@@ -3,22 +3,24 @@
 import React from 'react'
 
 const style = props => ({
-  backgroundColor: props.isPlaying ? '#448844' : '#333333',
-  color: props.isPlaying ? '#ffffff' : '#aaaaaa',
+  backgroundColor: '#333333',
+  color: '#dddddd',
   width: '100%',
   margin: 0,
   marginTop: '1px',
   textAlign: 'center',
   overflowX: 'hidden',
   overflowY: 'initial',
+  cursor: 'pointer',
 })
 
 export default function(props) {
   return (
-    <div className='timeline-region'
+    <div className='timeline-region adder'
       style={ style(props) }
+      onClick={ props.onClick }
     >
-      <p>{props.name}</p>
+      <p>+ Add sound</p>
     </div>
   )
 }

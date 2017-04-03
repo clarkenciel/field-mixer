@@ -36,14 +36,29 @@ const dw = Math.max(
   window.innerWidth || 0
 )
 
+const libraryProps = {
+  visible: false,
+  samples: samples,
+  onCoverClick: console.log,
+  onSampleClick: console.log
+}
+
+const mixerProps = {
+  timelines: timelines,
+  playing: false,
+  onRegionAdd: console.log,
+  onGainChange: console.log,
+  onPanChange: console.log,
+  onPlay: console.log,
+  onPause: console.log
+}
+
 render(
   <AppComponent
-    libraryCollapsed={ false }
-    samples={ samples }
-    timelines={ timelines }
-    playing={ false }
     dh={ dh }
     dw={ dw }
+    libraryProps={libraryProps}
+    mixerProps={mixerProps}
   />,
   document.getElementById('mixer')
 )

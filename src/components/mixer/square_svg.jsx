@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function(props) {
   return (
-    <svg height={ props.length } width={ props.length } >
+    <svg onClick={ props.onClick } height={ props.length } width={ props.length } >
       { props.children }
     </svg>
   )

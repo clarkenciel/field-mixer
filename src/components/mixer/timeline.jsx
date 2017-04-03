@@ -33,6 +33,7 @@ export default function(props) {
         <RegionList
           regions={ props.regions }
           currentlyPlayingRegion={ props.currentlyPlayingRegion }
+          onAdd={ props.onAdd }
         />
       </div>
     </div>

@@ -29,11 +29,15 @@ const regionListStyle = props => ({
 export default function(props) {
   const controls = props.timelines.map((tl, idx) =>
     <Control key={ idx } {...tl}
-      width={ 100 / props.timelines.length + '%' } />)
+      width={ 100 / props.timelines.length + '%' }
+      onGainChange={ val => props.onGainChange(idx, val) }
+      onPanChange={ val => props.onPanChange(idx, val) }
+    />)
 
   const regions = props.timelines.map((tl, idx) =>
     <RegionList key={ idx } {...tl}
       width={ 100 / props.timelines.length + '%' }
+      onAdd={ () => props.onAdd(idx) }
     />)
 
   return (

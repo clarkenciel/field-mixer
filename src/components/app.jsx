@@ -5,10 +5,8 @@ import Mixer from './mixer/mixer.jsx'
 import Library from './sample_library/library.jsx'
 
 const style = props => ({
-  position: 'absolute',
-  top: props.dw * 0.05,
-  left: props.dw * 0.05,
-  width: props.dw * 0.9,
+  width: '100%',
+  height: '100%',
   maxWidth: '900px',
   height: props.dh,
   margin: 'auto',
@@ -30,21 +28,15 @@ export default function(props) {
       id='app-contents'
       style={ style(props) }
     >
+      <Library
+        columnWidth={ '50%' }
+        { ...props.libraryProps }
+      />
       <div id='mixer-holder'
         style={ mixerHolderStyle(props) }
       >
         <Mixer
-          timelines={ props.timelines }
-          playing={ props.playing }
-        />
-      </div>
-      <div id='library-holder'
-        style={ libraryHolderStyle(props) }
-      >
-        <Library
-          columnWidth={ '50%' }
-          collapsed={ props.libraryCollapsed }
-          samples={ props.samples }
+          { ...props.mixerProps }
         />
       </div>
     </div>

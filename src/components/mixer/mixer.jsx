@@ -18,9 +18,14 @@ export default function(props) {
     >
       <TlGroup
         timelines={ props.timelines }
+        onAdd={ props.onRegionAdd }
+        onGainChange={ props.onGainChange }
+        onPanChange={ props.onPanChange }
       />
       <Controls
         playing={ props.playing }
+        onPlay={ props.onPlay }
+        onPause={ props.onPause }
       />
     </div>
   )

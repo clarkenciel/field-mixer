@@ -7,7 +7,8 @@ const headerStyle = {
   flexDirection: 'row',
   flexWrap: 'nowrap',
   padding: 0,
-  paddingLeft: '10px'
+  paddingLeft: '10px',
+  backgroundColor: '#999999'
 }
 
 const titleColumnStyle = width => ({

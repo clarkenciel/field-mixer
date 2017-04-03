@@ -32,11 +32,13 @@ const regionDurationStyle = width => ({
   width: width
 })
 
-export default function({ fileName, region, selected, columnWidth }) {
+export default function({ fileName, region, selected, columnWidth, onClick }) {
   return (
     <div
       className='library-region'
-      style={ regionStyle(selected) }>
+      style={ regionStyle(selected) }
+      onClick={ onClick }
+    >
       <div
         className='region-filename'
         style={ regionFilenameStyle(columnWidth) }>
