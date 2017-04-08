@@ -19,7 +19,6 @@ const style = props => ({
 
 export default function(props) {
   const columnWidth = props.columnWidth || '25%'
-console.log(props)
   const samples = props.samples.map((reg, idx) => {
     return (
       <LibraryRegion

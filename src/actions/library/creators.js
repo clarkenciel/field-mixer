@@ -7,6 +7,16 @@ const addItem = item => ({
   item
 })
 
+const display = () => ({
+  type: Lat.DISPLAY
+})
+
+const hide = () => ({
+  type: Lat.HIDE
+})
+
 export default {
-  addItem
+  addItem,
+  display,
+  hide
 }

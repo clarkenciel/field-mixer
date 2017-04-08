@@ -34,11 +34,13 @@ export default function(props) {
       onPanChange={ val => props.onPanChange(idx, val) }
     />)
 
-  const regions = props.timelines.map((tl, idx) =>
-    <RegionList key={ idx } {...tl}
+  const regions = props.timelines.map((tl, idx) => {
+    return (<RegionList key={ idx } {...tl}
+      regions={ tl.scheduledRegions() }
       width={ 100 / props.timelines.length + '%' }
       onAdd={ () => props.onAdd(idx) }
     />)
+    })
 
   return (
     <div

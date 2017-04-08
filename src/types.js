@@ -9,10 +9,16 @@ const MixerActionTypes = {
   STOP: 'mixer/stop',
   PAUSE: 'mixer/pause',
   RESUME: 'mixer/resume',
+  SET_GAIN: 'mixer/set-gain',
+  SET_PAN: 'mixer/set-pan',
+  ADD_REGION: 'mixer/add-region',
+  SELECT_REGION: 'mixer/select-region'
 }
 
 const LibraryActionTypes = {
-  ADD_ITEM: 'library/add-item'
+  ADD_ITEM: 'library/add-item',
+  DISPLAY: 'library/display',
+  HIDE: 'library/hide'
 }
 
 export {

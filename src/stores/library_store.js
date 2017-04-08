@@ -10,7 +10,8 @@ class LibraryStore extends ReduceStore {
 
   getInitialState() {
     return {
-      library: Library()
+      library: Library(),
+      visible: false
     }
   }
 
@@ -18,6 +19,14 @@ class LibraryStore extends ReduceStore {
     switch(action.type) {
       case Lat.ADD_ITEM:
         state.library.push(action.item)
+        return Object.create(state)
+
+      case Lat.DISPLAY:
+        state.visible = true
+        return Object.create(state)
+
+      case Lat.HIDE:
+        state.visible = false
         return Object.create(state)
 
       default:

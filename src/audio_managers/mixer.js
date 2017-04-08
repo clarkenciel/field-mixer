@@ -47,10 +47,16 @@ const MixerData = {
     this._timeAtResume = this._startTime
     this._runTime = 0
     this._timelines.forEach(tl => tl.play(this._startTime))
+    this._playing = true
+  },
+
+  playing() {
+    return !!this._playing
   },
 
   stop() {
     this._timelines.forEach(tl => tl.stop())
+    this._playing = false
   },
 
   pause() {
@@ -58,6 +64,7 @@ const MixerData = {
     this._pauseTime = (this.context.currentTime * 1000) - this._timeAtResume
     this._runTime += this._pauseTime - this._startTime
     this._timelines.forEach(tl => tl.pause(this._pauseTime))
+    this._playing = false
   },
 
   resume() {
@@ -65,6 +72,7 @@ const MixerData = {
     this._timeAtResume = this.context.currentTime * 1000
     // console.log('mixer resume 2', this._timeAtResume)
     this._timelines.forEach(tl => tl.resume())
+    this._playing = true
   },
 }
 

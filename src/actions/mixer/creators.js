@@ -53,6 +53,26 @@ const resume = () => ({
   type: Mat.RESUME
 })
 
+const setGain = (tlId, gainVal) => ({
+  type: Mat.SET_GAIN,
+  tlId, gainVal
+})
+
+const setPan = (tlId, panVal) => ({
+  type: Mat.SET_PAN,
+  tlId, panVal
+})
+
+const selectTimelineForAdd = tlId => ({
+  type: Mat.SELECT_TIMELINE,
+  tlId
+})
+
+const addRegionToSelectedTimeline = region => ({
+  type: Mat.ADD_REGION,
+  region
+})
+
 export default {
   appendRegion,
   prependRegion,
@@ -62,8 +82,14 @@ export default {
   shiftRegion,
   removeRegion,
 
+  addRegionToSelectedTimeline,
+  selectTimelineForAdd,
+
   play,
   stop,
   pause,
-  resume
+  resume,
+
+  setGain,
+  setPan
 }
