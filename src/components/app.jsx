@@ -23,15 +23,19 @@ const libraryHolderStyle = props => ({
 })
 
 export default function(props) {
+  const lib = !props.libraryProps.visible ?
+    null :
+    <Library
+      columnWidth={ '50%' }
+      { ...props.libraryProps }
+    />
+
   return (
     <div
       id='app-contents'
       style={ style(props) }
     >
-      <Library
-        columnWidth={ '50%' }
-        { ...props.libraryProps }
-      />
+      { lib }
       <div id='mixer-holder'
         style={ mixerHolderStyle(props) }
       >

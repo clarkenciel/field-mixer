@@ -6,8 +6,8 @@ const LibraryTraits = {
   item(idx) { return this.items[idx] }
 }
 
-export default () => {
+export default items => {
   const out = Object.create(LibraryTraits)
-  out.items = []
+  out.items = items || []
   return out
 }

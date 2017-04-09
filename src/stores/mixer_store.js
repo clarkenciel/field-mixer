@@ -16,7 +16,8 @@ class MixerStore extends ReduceStore {
     Array(4).fill(null).forEach(_ => mixer.appendTimeline(RelativeTimeline))
     return {
       mixer,
-      selectedTimeline: undefined
+      timelineSelected: false,
+      selectedTimeline: -1
     }
   }
 
@@ -81,18 +82,21 @@ class MixerStore extends ReduceStore {
 
       case Mat.SELECT_TIMELINE:
         state.selectedTimeline = action.tlId
+        state.timelineSelected = true
         return Object.create(state)
 
       case Mat.ADD_REGION:
-        if (typeof state.selectedTimeline != 'undefined') {
+        if (state.timelineSelected) {
           mixer.timeline(state.selectedTimeline).appendRegion(action.region)
-          state.selectedTimeline = undefined
+          state.selectedTimeline = -1
+          state.timelineSelected = false
           return Object.create(state)
         }
         else return state
 
       case Lat.HIDE:
-        state.selectedTimeline = undefined
+        state.timelineSelected = false
+        state.selectedTimeline = -1
         return Object.create(state)
 
       default:

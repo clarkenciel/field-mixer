@@ -32,22 +32,22 @@ const regionDurationStyle = width => ({
   width: width
 })
 
-export default function({ fileName, region, selected, columnWidth, onClick }) {
+export default function(props) {
   return (
     <div
       className='library-region'
-      style={ regionStyle(selected) }
-      onClick={ onClick }
+      style={ regionStyle(props.selected) }
+      onClick={ props.onClick }
     >
       <div
         className='region-filename'
-        style={ regionFilenameStyle(columnWidth) }>
-        <p>{fileName}</p>
+        style={ regionFilenameStyle(props.columnWidth) }>
+        <p>{props.fileName}</p>
       </div>
       <div
         className='region-duration'
-        style={ regionDurationStyle(columnWidth) }>
-        <p>{region.lengthSeconds()} sec.</p>
+        style={ regionDurationStyle(props.columnWidth) }>
+        <p>{props.region.lengthSeconds()} sec.</p>
       </div>
     </div>
   )

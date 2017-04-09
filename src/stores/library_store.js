@@ -4,13 +4,21 @@ import { ReduceStore } from 'flux/utils'
 import { LibraryActionTypes as Lat } from '../types.js'
 import Library from '../library_managers/library.js'
 import Dispatcher from '../dispatcher/app.js'
+import Region from '../audio_managers/region.js'
+import ctx from '../audio_context.js'
 
 class LibraryStore extends ReduceStore {
   constructor() { super(Dispatcher) }
 
   getInitialState() {
+    const buf = ctx.createBuffer(2, 44100, ctx.sampleRate)
+    const bufs = Array(4).fill(null).map((_, idx) => {
+      const out = Region.fromBuffer(buf)
+      out.fileName = idx + '.wav'
+      return out
+    })
     return {
-      library: Library(),
+      library: Library(bufs),
       visible: false
     }
   }

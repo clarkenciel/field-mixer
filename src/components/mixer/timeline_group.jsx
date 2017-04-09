@@ -30,8 +30,8 @@ export default function(props) {
   const controls = props.timelines.map((tl, idx) =>
     <Control key={ idx } {...tl}
       width={ 100 / props.timelines.length + '%' }
-      onGainChange={ val => props.onGainChange(idx, val) }
-      onPanChange={ val => props.onPanChange(idx, val) }
+      onGainChange={ val => props.onGainChange(idx, Number(val.target.value)) }
+      onPanChange={ val => props.onPanChange(idx, Number(val.target.value)) }
     />)
 
   const regions = props.timelines.map((tl, idx) => {

@@ -15,7 +15,7 @@ const getState = () => {
   const libState = LibStore.getState()
   const mixState = MixStore.getState()
 
-  if (typeof mixState.selectedTimeline != 'undefined') {
+  if (mixState.timelineSelected) {
     LA.display()
   }
 
