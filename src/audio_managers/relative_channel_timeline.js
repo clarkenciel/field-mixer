@@ -64,22 +64,34 @@ RelativeTimeline.removePlayer = function(idx) {
 
 RelativeTimeline.removeFromCollection = function(name, idx) {
   const removed = this[name][idx]
+  const collection = this[name]
   if (removed) {
-    this[name].map((sr, idx) => {
-      if (idx > idx) {
-        sr.start = sr.start - removed.re
-      }
-      else {
-        return sr
+    collection.forEach((sr, idx2) => {
+      if (idx2 > idx) {
+        sr.start = sr.start - removed.end
+        sr.end = sr.end - removed.end
       }
     })
   }
-  this[name] = this[name].slice(0, idx).concat(this[name].slice(idx + 1))
+  this[name] = collection.slice(0, idx).concat(collection.slice(idx + 1))
   return this
 }
 
 // TODO: build out so that scheduled regions don't have gaps
-RelativeTimeline.adjustRegions = function() {
+RelativeTimeline.adjustTimes = function() {
+  if (this._scheduledRegions.length > 0) {
+    if (this._scheduledRegions[0].start === 0)
+      return this
+    else {
+      const first = this._scheduledRegions[0].start
+      this._scheduledRegions = this._scheduledRegions
+        .map(sr => {
+          sr.start = sr.start - first
+          sr.end = sr.end - first
+        })
+      return this
+    }
+  }
 }
 
 RelativeTimeline.popRegion = function() {
