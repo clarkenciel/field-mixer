@@ -1,3 +1,9 @@
+'use strict'
+
+import { Promise } from 'bluebird'
+
+Promise.config({ cancellation: true })
+
 const MixerData = {
   timelines() { return this._timelines },
   size() { return this._timelines.length },
@@ -46,8 +52,29 @@ const MixerData = {
     this._startTime = this.context.currentTime * 1000
     this._timeAtResume = this._startTime
     this._runTime = 0
+    this._endPromise = new Promise((topResolve, topReject) => {
+      Promise.all(this._timelines
+        .filter(tl => tl.scheduledRegions().length > 0)
+        .map(tl =>
+          new Promise((resolve, reject) => {
+            try {
+              tl.scheduledRegions()[tl.scheduledRegions().length - 1]
+                .onEnd(x => resolve('done'))
+            }
+            catch (e) {
+              reject(e)
+            }
+          })
+        ))
+        .then(_ => topResolve(this.onended(this)))
+        .catch(topReject)
+    })
     this._timelines.forEach(tl => tl.play(this._startTime))
     this._playing = true
+  },
+
+  onEnd(f) {
+    this.onended = f
   },
 
   playing() {
@@ -57,10 +84,11 @@ const MixerData = {
   stop() {
     this._timelines.forEach(tl => tl.stop())
     this._playing = false
+    if (this._endPromise && this._endPromise.isPending)
+      this._endPromise.cancel()
   },
 
   pause() {
-    // console.log('mixer pause', this._pauseTime, this._timeAtResume, this.context.currentTime * 1000)
     this._pauseTime = (this.context.currentTime * 1000) - this._timeAtResume
     this._runTime += this._pauseTime - this._startTime
     this._timelines.forEach(tl => tl.pause(this._pauseTime))
@@ -68,9 +96,7 @@ const MixerData = {
   },
 
   resume() {
-    // console.log('mixer resume 1', this._timeAtResume)
     this._timeAtResume = this.context.currentTime * 1000
-    // console.log('mixer resume 2', this._timeAtResume)
     this._timelines.forEach(tl => tl.resume())
     this._playing = true
   },

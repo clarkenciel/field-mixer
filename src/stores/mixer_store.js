@@ -6,6 +6,7 @@ import Mixer from '../audio_managers/mixer.js'
 import RelativeTimeline from '../audio_managers/relative_channel_timeline.js'
 import { MixerActionTypes as Mat } from '../types.js'
 import { LibraryActionTypes as Lat } from '../types.js'
+import Ma from '../actions/mixer/dispatchers.js'
 import Context from '../audio_context.js'
 
 class MixerStore extends ReduceStore {
@@ -14,6 +15,7 @@ class MixerStore extends ReduceStore {
   getInitialState() {
     const mixer = Mixer(Context)
     Array(4).fill(null).forEach(_ => mixer.appendTimeline(RelativeTimeline))
+    mixer.onEnd(() => Ma.stop())
     return {
       mixer,
       timelineSelected: false,
@@ -61,7 +63,8 @@ class MixerStore extends ReduceStore {
         return Object.create(state)
 
       case Mat.STOP:
-        state.mixer.stop()
+        try { state.mixer.stop() }
+        catch (e) { console.log(`STOP ERROR: ${e}`) }
         return Object.create(state)
 
       case Mat.PAUSE:

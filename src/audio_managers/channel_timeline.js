@@ -34,9 +34,7 @@ const TimeLineTraits = {
     if (!this._pausedAt)
       this.play()
     else {
-      // console.log('timeline resume', this._pausedAt)
       this._scheduledRegions.forEach((sr, idx) => {
-        // console.log('timeline resume > region start', sr.start)
         if (sr.start >= this._pausedAt)
           this._playPlayer(idx, sr)
       })
@@ -71,16 +69,15 @@ const TimeLineTraits = {
   _playPlayer(idx, region) {
     if (!this._players[idx]) {
       this._players[idx] = Player(this.context, region.region.buffer).initialize()
-      if (region.onstart) this._players[idx].onStart(region.onstart)
-      if (region.onend) this._players[idx].onEnd(region.onend)
     }
+    if (region.onstart) this._players[idx].onStart(region.onstart)
+    if (region.onend) this._players[idx].onEnd(region.onend)
     this._players[idx].setGain(this.gain)
     this._players[idx].setPan(this.pan)
     this._players[idx] = this._players[idx].play(region.start * 0.001)
   },
 
   setGain(nu) {
-    // console.log('timeline gain', nu)
     this.gain = nu
     this._players.forEach(play =>
       play.setGain(this.gain)
@@ -88,7 +85,6 @@ const TimeLineTraits = {
   },
 
   setPan(nu) {
-    // console.log('timeline pan', nu)
     this.pan = nu
     this._players.forEach(play =>
       play.setPan(this.pan)

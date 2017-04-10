@@ -16,7 +16,10 @@ const ChainData = {
     this.playerNode.connect(this.gain)
     this.playing = false
     this.playerNode.onended = _ => {
-      if (this.onstop) this.onstop(this)
+      if (this.onstop) {
+        this.onstop(this)
+        this.initialize()
+      }
       else this.initialize()
     }
     return this
@@ -60,10 +63,10 @@ const ChainData = {
 
   onEnd(f) {
     this.onstop = f
-    this.playerNode.onended = _ => {
-      if (this.onstop) this.onstop(this)
-      else this.initialize()
-    }
+    // this.playerNode.onended = _ => {
+    //   if (this.onstop) this.onstop(this)
+    //   else this.initialize()
+    // }
     return this
   }
 }
