@@ -7,7 +7,7 @@ import TlGroup from './timeline_group.jsx'
 const style = props => ({
   backgroundColor: '#777777',
   position: 'relative',
-  height: '100%',
+  // height: '100%',
 })
 
 export default function(props) {
@@ -16,17 +16,27 @@ export default function(props) {
       id='mixer-app'
       style={ style(props) }
     >
-      <TlGroup
-        timelines={ props.timelines }
-        onAdd={ props.onRegionAdd }
-        onGainChange={ props.onGainChange }
-        onPanChange={ props.onPanChange }
-      />
+      <div className='timeline-holder'
+        style={{ height: '90%' }}
+      >
+        <TlGroup
+          timelines={ props.timelines }
+          onAdd={ props.onRegionAdd }
+          onRemove={ props.onRegionRemove }
+          onGainChange={ props.onGainChange }
+          onPanChange={ props.onPanChange }
+        />
+      </div>
+
+    <div className='control-holder'
+      style={{ height: '10%' }}
+    >
       <Controls
         playing={ props.playing }
         onPlay={ props.onPlay }
-        onPause={ props.onPause }
+        onPause={ props.onStop }
       />
     </div>
+  </div>
   )
 }

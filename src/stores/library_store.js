@@ -11,14 +11,25 @@ class LibraryStore extends ReduceStore {
   constructor() { super(Dispatcher) }
 
   getInitialState() {
-    const buf = ctx.createBuffer(2, 44100, ctx.sampleRate)
-    const bufs = Array(4).fill(null).map((_, idx) => {
+    const bufs = Array(4).fill(null).map(_ => {
+      const buf = ctx.createBuffer(2, 44100 * Math.random(), ctx.sampleRate)
+      for (let i = 0; i < 2; i++) {
+        let chan = buf.getChannelData(i)
+        for (let j = 0; j < 44100; j++) {
+          chan[j] = Math.random() * 2 - 1
+        }
+      }
+      return buf
+    })
+
+    const regs = bufs.map((buf, idx) => {
       const out = Region.fromBuffer(buf)
       out.fileName = idx + '.wav'
       return out
     })
+
     return {
-      library: Library(bufs),
+      library: Library(regs),
       visible: false
     }
   }

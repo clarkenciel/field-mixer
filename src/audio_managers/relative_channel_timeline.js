@@ -44,10 +44,28 @@ RelativeTimeline.prependRegion = function(region) {
   return this.insertAt(0, region)
 }
 
+// TODO: fix so that removing from head adjusts play times
 RelativeTimeline.removeAt = function(idx) {
-  const removed = this._scheduledRegions[idx]
+  this.removeRegion(idx)
+  this.removePlayer(idx)
+  this.adjustTimes()
+  return this
+}
+
+RelativeTimeline.removeRegion = function(idx) {
+  this.removeFromCollection('_scheduledRegions', idx)
+  return this
+}
+
+RelativeTimeline.removePlayer = function(idx) {
+  this.removeFromCollection('_players', idx)
+  return this
+}
+
+RelativeTimeline.removeFromCollection = function(name, idx) {
+  const removed = this[name][idx]
   if (removed) {
-    this._scheduledRegions.map((sr, idx) => {
+    this[name].map((sr, idx) => {
       if (idx > idx) {
         sr.start = sr.start - removed.re
       }
@@ -56,9 +74,12 @@ RelativeTimeline.removeAt = function(idx) {
       }
     })
   }
-  this._scheduledRegions = this._scheduledRegions.slice(0, idx).
-    concat(this._scheduledRegions.slice(idx + 1))
+  this[name] = this[name].slice(0, idx).concat(this[name].slice(idx + 1))
   return this
+}
+
+// TODO: build out so that scheduled regions don't have gaps
+RelativeTimeline.adjustRegions = function() {
 }
 
 RelativeTimeline.popRegion = function() {

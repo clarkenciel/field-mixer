@@ -58,6 +58,7 @@ class MixerStore extends ReduceStore {
 
       case Mat.PLAY:
         state.mixer.play()
+        // debugger
         return Object.create(state)
 
       case Mat.STOP:
@@ -73,11 +74,11 @@ class MixerStore extends ReduceStore {
         return Object.create(state)
 
       case Mat.SET_PAN:
-        state.mixer.timeline(action.tlId).pan = action.panVal
+        state.mixer.timeline(action.tlId).setPan(action.panVal)
         return Object.create(state)
 
       case Mat.SET_GAIN:
-        state.mixer.timeline(action.tlId).gain = action.gainVal
+        state.mixer.timeline(action.tlId).setGain(action.gainVal)
         return Object.create(state)
 
       case Mat.SELECT_TIMELINE:
@@ -87,7 +88,8 @@ class MixerStore extends ReduceStore {
 
       case Mat.ADD_REGION:
         if (state.timelineSelected) {
-          mixer.timeline(state.selectedTimeline).appendRegion(action.region)
+          // debugger
+          state.mixer.timeline(state.selectedTimeline).appendRegion(action.region)
           state.selectedTimeline = -1
           state.timelineSelected = false
           return Object.create(state)

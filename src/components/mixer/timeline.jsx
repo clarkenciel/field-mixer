@@ -34,6 +34,7 @@ export default function(props) {
           regions={ props.regions }
           currentlyPlayingRegion={ props.currentlyPlayingRegion }
           onAdd={ props.onAdd }
+          onRemove={ props.onRemove }
         />
       </div>
     </div>

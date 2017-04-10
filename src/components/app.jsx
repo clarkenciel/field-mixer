@@ -8,18 +8,21 @@ const style = props => ({
   width: '100%',
   height: '100%',
   maxWidth: '900px',
-  height: props.dh,
+  // height: props.dh,
+  height: '100vh',
   margin: 'auto',
 })
 
 const mixerHolderStyle = props => ({
   position: 'relative',
-  height: props.dh * 0.7
+  // height: props.dh * 0.7
+  height: '95%',
 })
 
 const libraryHolderStyle = props => ({
   position: 'relative',
-  height: props.dh * 0.2
+  // height: props.dh * 0.2
+  height: '95%',
 })
 
 export default function(props) {

@@ -25,7 +25,7 @@ export default function(props) {
         fileName={ reg.fileName }
         region={ reg }
         columnWidth={ columnWidth }
-        onClick={ props.onSampleClick }
+        onClick={ () => props.onSampleClick(reg) }
       />
     )
   })

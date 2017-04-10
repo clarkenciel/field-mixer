@@ -6,7 +6,7 @@ const ChainData = {
   playerNode: null,
   onstop: null,
   onstart: null,
-  playing: null,
+  playing: false,
 
   initialize(buffer) {
     if (this.playerNode) this.playerNode.disconnect()
@@ -14,7 +14,7 @@ const ChainData = {
     this.playerNode = this.context.createBufferSource()
     this.playerNode.buffer = this.buffer
     this.playerNode.connect(this.gain)
-    this.playing = null
+    this.playing = false
     this.playerNode.onended = _ => {
       if (this.onstop) this.onstop(this)
       else this.initialize()

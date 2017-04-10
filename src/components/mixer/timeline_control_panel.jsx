@@ -1,13 +1,13 @@
 'use strict'
 
 import React from 'react'
-import Slider from './slider.jsx'
 import Gain from './gain_control.jsx'
 import Pan from './pan_control.jsx'
 
 const style = props => ({
-  // backgroundColor: '#999999'
-  width: props.width
+  width: props.width,
+  marginLeft: '5px',
+  marginRight: '5px',
 })
 
 export default function(props) {

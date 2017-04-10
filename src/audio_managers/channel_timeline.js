@@ -74,7 +74,25 @@ const TimeLineTraits = {
       if (region.onstart) this._players[idx].onStart(region.onstart)
       if (region.onend) this._players[idx].onEnd(region.onend)
     }
+    this._players[idx].setGain(this.gain)
+    this._players[idx].setPan(this.pan)
     this._players[idx] = this._players[idx].play(region.start * 0.001)
+  },
+
+  setGain(nu) {
+    // console.log('timeline gain', nu)
+    this.gain = nu
+    this._players.forEach(play =>
+      play.setGain(this.gain)
+    )
+  },
+
+  setPan(nu) {
+    // console.log('timeline pan', nu)
+    this.pan = nu
+    this._players.forEach(play =>
+      play.setPan(this.pan)
+    )
   }
 }
 
@@ -83,7 +101,7 @@ export default context => {
   out.context = context
   out._players = []
   out._scheduledRegions = []
-  out.gain = 0.0
-  out.pan = 0.0
+  out.setGain(0.0)
+  out.setPan(0.0)
   return out
 }

@@ -16,7 +16,7 @@ const PlayerData = {
   },
 
   setPan(val) {
-    this.chain.setGain(val)
+    this.chain.setPan(val)
   },
 
   onStart(f) {

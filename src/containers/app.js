@@ -15,6 +15,7 @@ const getState = () => {
   const libState = LibStore.getState()
   const mixState = MixStore.getState()
 
+  // TODO: i feel there is definitely a better way to handle this.
   if (mixState.timelineSelected) {
     LA.display()
   }
@@ -32,7 +33,7 @@ const getState = () => {
   const libraryProps = {
     samples: libState.library.items,
     visible: libState.visible,
-    onSampleClick: MA.appendRegion,
+    onSampleClick: MA.addRegionToSelectedTimeline,
     onCoverClick: LA.hide,
   }
 
@@ -44,7 +45,8 @@ const getState = () => {
     onStop: MA.stop,
     onGainChange: MA.setGain,
     onPanChange: MA.setPan,
-    onRegionAdd: MA.selectTimelineForAdd
+    onRegionAdd: MA.selectTimelineForAdd,
+    onRegionRemove: MA.removeRegion
   }
 
   return {

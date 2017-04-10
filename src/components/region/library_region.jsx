@@ -10,6 +10,7 @@ const regionStyle = selected => ({
   paddingLeft: '4px',
   backgroundColor: selected ? 'blue' : 'white',
   borderTop: '1px solid black',
+  cursor: 'pointer'
 })
 
 const regionFilenameStyle = width => ({

@@ -7,13 +7,15 @@ import Pause from './pause_button.jsx'
 const mixerStyle = props => ({
   width: '100%',
   backgroundColor: props.playing ? '#eaeaaa' : '#aaeaaa',
-  paddingTop: '10px',
-  cursor: 'pointer'
+  // paddingTop: '10px',
+  cursor: 'pointer',
+  height: '100%'
 })
 
 const buttonHolderStyle = props => ({
   margin: 'auto',
   width: `${props.width}px`,
+  padding: '1%'
 })
 
 export default function(props) {

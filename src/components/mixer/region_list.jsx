@@ -9,15 +9,17 @@ const style = props => ({
   margin: 0,
   // marginLeft: '10px'
   padding: 0,
-  paddingLeft: '1px'
+  paddingLeft: '1px',
 })
 
 export default function(props) {
   const regions = props.regions && props.regions.map((region, idx) =>
     <Region
       key={idx}
-      name={region.fileName}
-      isPlaying={idx === props.currentlyPlayingRegion} />)
+      name={region.region.fileName}
+      isPlaying={idx === props.currentlyPlayingRegion}
+      onRemove={ () => props.onRemove(idx) }
+    />)
   regions.push(<AddRegion key={ 'adder' } onClick={ props.onAdd }/>)
 
   return (

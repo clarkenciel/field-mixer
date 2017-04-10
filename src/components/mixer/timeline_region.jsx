@@ -11,6 +11,22 @@ const style = props => ({
   textAlign: 'center',
   overflowX: 'hidden',
   overflowY: 'initial',
+  display: 'flex',
+  flexDirection: 'row'
+})
+
+const buttonStyle = props => ({
+  padding: 0,
+  paddingLeft: '10px',
+  paddingRight: '10px',
+  cursor: 'pointer',
+  color: '#ffaaaa'
+})
+
+const nameStyle = props => ({
+  padding: 0,
+  paddingLeft: '10px',
+  paddingRight: '10px',
 })
 
 export default function(props) {
@@ -18,7 +34,17 @@ export default function(props) {
     <div className='timeline-region'
       style={ style(props) }
     >
-      <p>{props.name}</p>
+      <div className='remove-button'
+        onClick={ props.onRemove }
+        style={ buttonStyle(props) }
+      >
+        <h3>X</h3>
+      </div>
+      <div className='region-name'
+        style={ nameStyle(props) }
+      >
+        <h4>{props.name}</h4>
+      </div>
     </div>
   )
 }

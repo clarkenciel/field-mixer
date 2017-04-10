@@ -12,7 +12,23 @@ const style = props => ({
   overflowX: 'hidden',
   overflowY: 'initial',
   cursor: 'pointer',
+  display: 'flex',
+  flexDirection: 'row'
 })
+
+const buttonStyle = {
+  color: '#aaffaa',
+  padding: 0,
+  paddingLeft: '10px',
+  paddingRight: '10px'
+}
+
+const textStyle = {
+  padding: 0,
+  paddingLeft: '10px',
+  paddingRight: '10px'
+
+}
 
 export default function(props) {
   return (
@@ -20,7 +36,12 @@ export default function(props) {
       style={ style(props) }
       onClick={ props.onClick }
     >
-      <p>+ Add sound</p>
+      <div style={ buttonStyle }>
+        <h3 >+</h3>
+      </div>
+      <div style={ textStyle }>
+        <h4>Add sound</h4>
+      </div>
     </div>
   )
 }
