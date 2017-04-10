@@ -58,7 +58,6 @@ class MixerStore extends ReduceStore {
 
       case Mat.PLAY:
         state.mixer.play()
-        // debugger
         return Object.create(state)
 
       case Mat.STOP:
@@ -88,7 +87,6 @@ class MixerStore extends ReduceStore {
 
       case Mat.ADD_REGION:
         if (state.timelineSelected) {
-          // debugger
           state.mixer.timeline(state.selectedTimeline).appendRegion(action.region)
           state.selectedTimeline = -1
           state.timelineSelected = false

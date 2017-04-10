@@ -36,6 +36,18 @@ module.exports = {
       }, {
         loader: 'sass-loader'
       }]
+    }, {
+      test: /\.(gif|jpe?g)$/i,
+      use: [{
+        loader: 'file-loader'
+      }, {
+        loader: 'image-webpack-loader',
+        query: {
+          progressive: true,
+          // optimizationLevel: 10,
+          // interlaced: false
+        }
+      }]
     }
     ]
   },
@@ -50,5 +62,14 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin()
   ],
 
-  devtool: 'source-map'
+  devtool: 'source-map',
+  externals: {
+    fs: '{}',
+    tls: '{}',
+    net: '{}',
+    console: '{}'
+  },
+  node: {
+
+  }
 }

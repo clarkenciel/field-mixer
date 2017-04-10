@@ -15,6 +15,7 @@ export default function(props) {
       <Header columnWidth={ props.columnWidth }/>
       <Table >
         { props.samples }
+        { props.loading }
       </Table>
     </div>
     )

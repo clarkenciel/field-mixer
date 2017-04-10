@@ -31,7 +31,8 @@ const getState = () => {
   )
 
   const libraryProps = {
-    samples: libState.library.items,
+    items: libState.library.items,
+    loading: libState.library.loadingItems,
     visible: libState.visible,
     onSampleClick: MA.addRegionToSelectedTimeline,
     onCoverClick: LA.hide,

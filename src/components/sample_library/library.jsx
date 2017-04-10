@@ -1,7 +1,8 @@
 'use strict'
 
 import React from 'react'
-import LibraryRegion from '../region/library_region.jsx'
+import Sample from '../region/library_region.jsx'
+import LoadingSample from './loading_sample/loading_sample.jsx'
 import Library from './expanded_library.jsx'
 import Cover from './cover.jsx'
 
@@ -18,9 +19,9 @@ const style = props => ({
 
 export default function(props) {
   const columnWidth = props.columnWidth || '25%'
-  const samples = props.samples.map((reg, idx) => {
+  const samples = props.items.map((reg, idx) => {
     return (
-      <LibraryRegion
+      <Sample
         key={idx}
         fileName={ reg.fileName }
         region={ reg }
@@ -30,10 +31,20 @@ export default function(props) {
     )
   })
 
+  const loadingSamples = props.loading.map((rec, idx) => {
+    return (
+      <LoadingSample
+        name={ rec.name }
+        key={ idx }
+      />
+      )
+  })
+
   const lib =
     <Library
       columnWidth={columnWidth}
       samples={samples}
+      loading={ loadingSamples }
     />
 
   return (

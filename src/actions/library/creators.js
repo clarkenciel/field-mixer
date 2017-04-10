@@ -2,9 +2,9 @@
 
 import { LibraryActionTypes as Lat } from '../../types.js'
 
-const addItem = item => ({
-  type: Lat.ADD_ITEM,
-  item
+const addItems = items => ({
+  type: Lat.ADD_ITEMS,
+  items
 })
 
 const display = () => ({
@@ -16,7 +16,7 @@ const hide = () => ({
 })
 
 export default {
-  addItem,
+  addItems,
   display,
   hide
 }

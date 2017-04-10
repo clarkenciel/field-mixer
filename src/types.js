@@ -16,9 +16,10 @@ const MixerActionTypes = {
 }
 
 const LibraryActionTypes = {
-  ADD_ITEM: 'library/add-item',
+  ADD_ITEMS: 'library/add-items',
   DISPLAY: 'library/display',
-  HIDE: 'library/hide'
+  HIDE: 'library/hide',
+  START_LOAD: 'library/start-load'
 }
 
 export {
