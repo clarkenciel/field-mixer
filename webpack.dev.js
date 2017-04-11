@@ -12,7 +12,7 @@ module.exports = {
   ],
 
   output: {
-    filename: 'app-[hash].js',
+    filename: 'app.[hash].js',
     path: publicDir,
     publicPath: '/'
   },
