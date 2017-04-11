@@ -34,7 +34,7 @@ export default function(props) {
       <Controls
         playing={ props.playing }
         onPlay={ props.onPlay }
-        onPause={ props.onStop }
+        onStop={ props.onStop }
       />
     </div>
   </div>

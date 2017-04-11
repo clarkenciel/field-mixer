@@ -37,7 +37,7 @@ export default function(props) {
       onClick={ props.onClick }
     >
       <div style={ buttonStyle }>
-        <h3 >+</h3>
+        <h3>➕</h3>
       </div>
       <div style={ textStyle }>
         <h4>Add sound</h4>

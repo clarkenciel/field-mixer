@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Play from './play_button.jsx'
-import Pause from './pause_button.jsx'
+import Stop from './stop_button.jsx'
 
 const mixerStyle = props => ({
   width: '100%',
@@ -24,7 +24,7 @@ export default function(props) {
     () => props.onPause() :
     () => props.onPlay()
   const button = props.playing ?
-    <Pause length={ buttonLen } /> :
+    <Stop length={ buttonLen } /> :
     <Play length={ buttonLen } />
 
   return (

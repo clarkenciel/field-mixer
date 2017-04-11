@@ -38,7 +38,7 @@ export default function(props) {
         onClick={ props.onRemove }
         style={ buttonStyle(props) }
       >
-        <h3>X</h3>
+        <h3>❌</h3>
       </div>
       <div className='region-name'
         style={ nameStyle(props) }

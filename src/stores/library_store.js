@@ -26,10 +26,10 @@ class LibraryStore extends ReduceStore {
       'park9.wav',
       'park10.wav',
       'park11.wav',
-      'piano1.aif',
-      'piano2.aif',
-      'piano3.aif',
-      'piano4.aif',
+      'piano1.wav',
+      'piano2.wav',
+      'piano3.wav',
+      'piano4.wav',
     ]
 
     const loadingFiles = files
