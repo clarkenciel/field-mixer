@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react'
+import * as x from './x.png'
 
 const style = props => ({
   backgroundColor: props.isPlaying ? '#448844' : '#333333',
@@ -20,7 +21,9 @@ const buttonStyle = props => ({
   paddingLeft: '10px',
   paddingRight: '10px',
   cursor: 'pointer',
-  color: '#ffaaaa'
+  color: '#ffaaaa',
+  display: 'flex',
+  alignContent: 'center'
 })
 
 const nameStyle = props => ({
@@ -38,7 +41,7 @@ export default function(props) {
         onClick={ props.onRemove }
         style={ buttonStyle(props) }
       >
-        <h3>❌</h3>
+        <img src={x.default} style={{ margin: 'auto', height: '20px', width: '20px' }}/>
       </div>
       <div className='region-name'
         style={ nameStyle(props) }

@@ -21,7 +21,7 @@ const buttonHolderStyle = props => ({
 export default function(props) {
   const buttonLen = 60
   const clickHandle = props.playing ?
-    () => props.onPause() :
+    () => props.onStop() :
     () => props.onPlay()
   const button = props.playing ?
     <Stop length={ buttonLen } /> :
