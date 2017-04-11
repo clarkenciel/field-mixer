@@ -4,7 +4,7 @@ const HTMLLoader = require('html-webpack-plugin')
 
 const here = path.resolve('.')
 const srcDir = path.join(here, 'src')
-const publicDir = path.join(here, 'build')
+const publicDir = path.join(here, '.')
 
 module.exports = {
   entry: [
