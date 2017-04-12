@@ -1,0 +1,66 @@
+#mixer-controls {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .button-holder {
+    margin: auto;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+  }
+
+  .button-holder:hover {
+    box-shadow: 0px 5px 10px #444444;
+  }
+
+  /* DESKTOP */
+  #playback-control {
+    // width: 100%;
+    flex-grow: 2;
+  }
+
+  #channel-nav-next,
+  #channel-nav-prev {
+    display: none;
+    background-color: #aaaaaa;
+    // width: 33%;
+    // margin: 0;
+    // margin-left: auto;
+    // margin-right: auto;
+  }
+
+  /* IPHONE */
+  /* Portrait */
+  @media only screen
+  and (max-device-width: 736px) {
+    #playback-control {
+      width: 33%;
+    }
+
+    #channel-nav-next,
+    #channel-nav-prev {
+      display: flex;
+    }
+  }
+}
+
+#mixer-controls.playing {
+  #playback-control {
+    background-color: #ea8888;
+  }
+}
+
+#mixer-controls.stopped {
+  #playback-control {
+    background-color: #aaeaaa;
+  }
+}

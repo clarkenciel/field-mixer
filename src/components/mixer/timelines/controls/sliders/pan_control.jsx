@@ -2,9 +2,7 @@
 
 import React from 'react'
 import Slider from './slider/slider.jsx'
-
-const panStyles = props => ({
-})
+import './pan.scss'
 
 const labelStyle = props => ({
   margin: 0,
@@ -13,10 +11,10 @@ const labelStyle = props => ({
 
 export default function(props) {
   return (
-    <div className='pan-control'
-      style={{ display: 'flex', flexDirection: 'row' }}
-    >
-      <div style={{ paddingTop: '5px' }}><h3>L</h3></div>
+    <div className='pan-control'>
+      <div className='label left'>
+        L
+      </div>
       <div>
         <Slider
           onChange={ props.onChange }
@@ -24,7 +22,9 @@ export default function(props) {
           name='pan'
           value={ props.pan } />
       </div>
-      <div style={{ paddingTop: '5px' }}><h3>R</h3></div>
+      <div className='label right'>
+        R
+      </div>
     </div>
     )
 }

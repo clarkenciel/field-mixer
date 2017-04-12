@@ -1,26 +1,19 @@
 'use strict'
 
 import React from 'react'
-import Controls from './mixer_control_panel.jsx'
-import TlGroup from './timeline_group.jsx'
-
-const style = props => ({
-  backgroundColor: '#777777',
-  position: 'relative',
-  // height: '100%',
-})
+import Controls from './controls/mixer_control_panel.jsx'
+import TlGroup from './timelines/group/group.jsx'
+import './mixer.scss'
 
 export default function(props) {
   return (
     <div
       id='mixer-app'
-      style={ style(props) }
     >
-      <div className='timeline-holder'
-        style={{ height: '90%' }}
-      >
+      <div className='timeline-holder'>
         <TlGroup
           timelines={ props.timelines }
+          inView={ props.timelineInView }
           onAdd={ props.onRegionAdd }
           onRemove={ props.onRegionRemove }
           onGainChange={ props.onGainChange }
@@ -28,9 +21,7 @@ export default function(props) {
         />
       </div>
 
-    <div className='control-holder'
-      style={{ height: '10%' }}
-    >
+    <div className='control-holder'>
       <Controls
         playing={ props.playing }
         onPlay={ props.onPlay }

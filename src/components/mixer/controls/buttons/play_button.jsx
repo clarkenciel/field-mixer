@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Svg from './square_svg.jsx'
+import './play.scss'
 
 const calculateDims = length => {
   let stopHeight = length - 10
@@ -14,12 +15,7 @@ export default function(props) {
     <Svg { ...props } >
       <polygon
         points={ calculateDims(props.length) }
-        style={ {
-            fill: props.fill || "none",
-            stroke: props.stroke || "black",
-            strokeWidth: "5px"
-          }
-        }
+        className='play-poly'
       />
     </Svg>
   )

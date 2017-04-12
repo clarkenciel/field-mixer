@@ -1,15 +1,12 @@
 'use strict'
 
 import React from 'react'
-import Region from './timeline_region.jsx'
-import AddRegion from './add_region.jsx'
+import Region from '../regions/region/region.jsx'
+import AddRegion from '../regions/adder/adder.jsx'
+import './region_list.scss'
 
 const style = props => ({
   width: props.width,
-  margin: 0,
-  // marginLeft: '10px'
-  padding: 0,
-  paddingLeft: '1px',
 })
 
 export default function(props) {

@@ -41,6 +41,7 @@ const getState = () => {
   const mixerProps = {
     timelines: mixState.mixer.timelines(),
     playing: mixState.mixer.playing(),
+    timelineInView: mixState.timelineInView,
     onPlay: MA.play,
     onPause: MA.pause,
     onStop: MA.stop,

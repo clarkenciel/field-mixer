@@ -12,7 +12,9 @@ const MixerActionTypes = {
   SET_GAIN: 'mixer/set-gain',
   SET_PAN: 'mixer/set-pan',
   ADD_REGION: 'mixer/add-region',
-  SELECT_REGION: 'mixer/select-region'
+  SELECT_REGION: 'mixer/select-region',
+  NEXT_TIMELINE: 'mixer/next-timeline',
+  PREV_TIMELINE: 'mixer/prev-timeline'
 }
 
 const LibraryActionTypes = {

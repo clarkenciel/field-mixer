@@ -73,6 +73,14 @@ const addRegionToSelectedTimeline = region => ({
   region
 })
 
+const nextTimeline = () => ({
+  type: Mat.NEXT_TIMELINE
+})
+
+const previousTimeline = () => ({
+  type: Mat.PREV_TIMELINE
+})
+
 export default {
   appendRegion,
   prependRegion,
@@ -91,5 +99,8 @@ export default {
   resume,
 
   setGain,
-  setPan
+  setPan,
+
+  nextTimeline,
+  previousTimeline,
 }

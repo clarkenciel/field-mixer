@@ -1,13 +1,12 @@
 'use strict'
 
 import React from 'react'
-import './style.css'
+import './style.scss'
 
 const holderStyle = ({ width }) => ({
   width: width
 })
 
-// TODO: fuck around with css to make this look nice
 export default function Slider(props) {
   return (
     <div

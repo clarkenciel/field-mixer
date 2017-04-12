@@ -3,6 +3,7 @@
 import React from 'react'
 import Mixer from './mixer/mixer.jsx'
 import Library from './sample_library/library.jsx'
+import './app.scss'
 
 const style = props => ({
   width: '100%',
