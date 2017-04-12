@@ -97,7 +97,7 @@ export default context => {
   out.context = context
   out._players = []
   out._scheduledRegions = []
-  out.setGain(0.0)
+  out.setGain(0.5)
   out.setPan(0.0)
   return out
 }

@@ -12,6 +12,7 @@ export default function Slider(props) {
     <div
       className='slider-holder' >
       <input
+        style={{ background: 'none' }}
         name={ props.name }
         value={ props.value }
         min={ props.min }

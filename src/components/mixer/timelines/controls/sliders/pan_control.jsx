@@ -13,17 +13,15 @@ export default function(props) {
   return (
     <div className='pan-control'>
       <div className='label left'>
-        L
+        <p>L</p>
       </div>
-      <div>
-        <Slider
-          onChange={ props.onChange }
-          min={ -1.0 } max={ 1.0 }
-          name='pan'
-          value={ props.pan } />
-      </div>
+      <Slider
+        onChange={ props.onChange }
+        min={ -1.0 } max={ 1.0 }
+        name='pan'
+        value={ props.pan } />
       <div className='label right'>
-        R
+        <p>R</p>
       </div>
     </div>
     )

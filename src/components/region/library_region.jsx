@@ -1,43 +1,20 @@
 'use strict'
 
 import React from 'react'
-
-const regionStyle = selected => ({
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'nowrap',
-  alignContent: 'space-around',
-  paddingLeft: '4px',
-  backgroundColor: selected ? 'blue' : 'white',
-  borderTop: '1px solid black',
-  cursor: 'pointer'
-})
+import './library_region.scss'
 
 const regionFilenameStyle = width => ({
-  margin: 0,
-  marginLeft: '3px',
-  marginRight: '3px',
-  padding: 0,
-  paddingLeft: '7px',
-  paddingRight: 'auto',
   width: width
 })
 
 const regionDurationStyle = width => ({
-  margin: 0,
-  marginLeft: '3px',
-  marginRight: '3px',
-  padding: 0,
-  paddingLeft: '7px',
-  paddingRight: 'auto',
   width: width
 })
 
 export default function(props) {
   return (
     <div
-      className='library-region'
-      style={ regionStyle(props.selected) }
+      className={ 'library-region' + (props.selected ? ' selected' : '') }
       onClick={ props.onClick }
     >
       <div
