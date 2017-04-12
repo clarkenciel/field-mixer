@@ -1,4 +1,5 @@
 .timeline-controls {
-  margin-left: 5px;
-  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }

@@ -2,7 +2,13 @@
   display: flex;
   flex-direction: row;
 
+  .slider-holder {
+    flex-grow: 2;
+  }
+
   .label {
+    flex-grow: 1;
+
     padding-top: 5px;
 
     p {
