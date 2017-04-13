@@ -8,7 +8,7 @@ import './app.scss'
 const style = props => ({
   width: '100%',
   height: '100%',
-  maxWidth: '900px',
+  maxWidth: '1000px',
   // height: props.dh,
   height: '100vh',
   margin: 'auto',

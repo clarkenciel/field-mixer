@@ -29,6 +29,7 @@ export default function(props) {
         regions={ tl.scheduledRegions() }
         onAdd={ () => props.onAdd(idx) }
         onRemove={ regId => props.onRemove(idx, regId) }
+        onSetRegionWait={ (regId, val) => props.onSetRegionWait(idx, regId, val) }
       />
     )
   })

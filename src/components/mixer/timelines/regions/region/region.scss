@@ -10,8 +10,8 @@
 
   .remove-button {
     padding: 0;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 1em;
+    padding-right: 1em;
     cursor: pointer;
     color: #ffaaaa;
     display: flex;
@@ -19,17 +19,29 @@
 
     img {
       margin: auto;
-      height: 20px;
-      width: 20px;
+      height: 1em;
+      width: 1em;
     }
   }
 
-  .region-name {
-    padding: 0;
-    padding-left: 10px;
-    padding-right: 10px;
+  .region-data {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    flex-grow: 1;
 
-    h4 {
+    .region-name {
+      padding: 0;
+      text-align: center;
+
+      p {
+        margin: 0;
+        margin-top: 2vh;
+      }
+    }
+
+    .region-wait {
     }
   }
 }

@@ -14,8 +14,10 @@ export default function(props) {
     <Region
       key={idx}
       name={region.region.fileName}
+      offset={region.offset}
       isPlaying={idx === props.currentlyPlayingRegion}
       onRemove={ () => props.onRemove(idx) }
+      onSetWait={ val => props.onSetWait(idx, val) }
     />)
   regions.push(<AddRegion key={ 'adder' } onClick={ props.onAdd }/>)
 

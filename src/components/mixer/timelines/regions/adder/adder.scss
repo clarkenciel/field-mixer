@@ -14,21 +14,21 @@
   .button {
     color: #aaffaa;
     padding: 0;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 1em;
+    padding-right: 1em;
     display: flex;
     align-content: center;
+    justify-content: left;
 
     img {
       margin: auto;
-      height: 20px;
-      width: 20px;
+      height: 1em;
+      width: 1em;
     }
   }
 
   .text {
     padding: 0;
-    padding-left: 10px;
-    padding-right: 10px;
+    flex-grow: 1;
   }
 }

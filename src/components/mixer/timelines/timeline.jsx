@@ -54,6 +54,7 @@ export default function(props) {
           currentlyPlayingRegion={ props.currentlyPlayingRegion }
           onAdd={ props.onAdd }
           onRemove={ props.onRemove }
+          onSetWait={ props.onSetRegionWait }
         />
       </div>
     </div>

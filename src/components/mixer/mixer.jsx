@@ -18,6 +18,7 @@ export default function(props) {
           onRemove={ props.onRegionRemove }
           onGainChange={ props.onGainChange }
           onPanChange={ props.onPanChange }
+          onSetRegionWait={ props.onSetRegionWait }
         />
       </div>
 

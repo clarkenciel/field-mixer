@@ -14,7 +14,8 @@ const MixerActionTypes = {
   ADD_REGION: 'mixer/add-region',
   SELECT_REGION: 'mixer/select-region',
   NEXT_TIMELINE: 'mixer/next-timeline',
-  PREV_TIMELINE: 'mixer/prev-timeline'
+  PREV_TIMELINE: 'mixer/prev-timeline',
+  SET_REGION_WAIT: 'mixer/set-region-wait'
 }
 
 const LibraryActionTypes = {

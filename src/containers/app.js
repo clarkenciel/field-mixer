@@ -48,7 +48,8 @@ const getState = () => {
     onGainChange: MA.setGain,
     onPanChange: MA.setPan,
     onRegionAdd: MA.selectTimelineForAdd,
-    onRegionRemove: MA.removeRegion
+    onRegionRemove: MA.removeRegion,
+    onSetRegionWait: MA.setRegionWait
   }
 
   return {
