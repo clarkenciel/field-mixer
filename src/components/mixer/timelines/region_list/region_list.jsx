@@ -19,13 +19,21 @@ export default function(props) {
       onRemove={ () => props.onRemove(idx) }
       onSetWait={ val => props.onSetWait(idx, val) }
     />)
-  regions.push(<AddRegion key={ 'adder' } onClick={ props.onAdd }/>)
+  // regions.push(<AddRegion key={ 'adder' } onClick={ props.onAdd }/>)
 
   return (
     <div className='region-list'
       style={ style(props) }
     >
-      { regions }
+      <div className='regions-scroll-hide'>
+        <div className='regions'>
+          { regions }
+        </div>
+      </div>
+
+      <div className='adder-holder'>
+        <AddRegion key={ 'adder' } onClick={ props.onAdd }/>
+      </div>
     </div>
   )
 }

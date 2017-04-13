@@ -1,0 +1,25 @@
+.wait-field {
+  p {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+
+    input[type="number"] {
+      border: none;
+      border-bottom: 1px solid #dfdfdf;
+      background-color: inherit;
+      color: #dfdfdf;
+      width: 2.8em;
+        text-align: center;
+      // @media (max-device-width: 736px) {
+      //   width: 10vw;
+      // }
+
+      ::-webkit-outer-spin-button.mod,
+      ::-webkit-inner-spin-button.mod {
+        -webkit-appearance: none;
+        background: inherit;
+        color: #dfdfdf;
+      }
+    }
+  }
+}

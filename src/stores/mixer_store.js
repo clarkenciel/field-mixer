@@ -113,6 +113,8 @@ class MixerStore extends ReduceStore {
       case Mat.SET_REGION_WAIT:
         let { tlId, regId, val } = action
         let tl = state.mixer.timeline(tlId)
+        if (val > 60) val = 60
+        if (val < 0) val = 0
         tl.setRegionOffset(regId, val)
         return Object.create(state)
 

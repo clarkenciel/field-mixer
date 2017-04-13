@@ -57,7 +57,7 @@ RelativeTimeline.removeAt = function(idx) {
 
 RelativeTimeline.removeRegion = function(idx) {
   this.removeFromCollection('_scheduledRegions', idx)
-  this.adjustTimes(idx)
+  if (idx < this._scheduledRegions.length) this.adjustTimes(idx)
   return this
 }
 
