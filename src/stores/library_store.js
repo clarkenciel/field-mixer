@@ -32,26 +32,37 @@ class LibraryStore extends ReduceStore {
       'piano4.wav',
     ]
 
-    const loadingFiles = files
-      .map(fname => api.getFile(fname).catch(e => errored(e)))
-
-    const loaders = files
-      .map(fname => delayed(fname))
-
-    Promise.all(loadingFiles)
-      .spread((...buffers) =>
-        La.addItems(
-          buffers.map((buf, idx) =>
-            resolved(files[idx], Region.fromBuffer(buf)))))
 
     return {
-      library: Library([], loaders),
-      visible: false
+      library: Library([], []),
+      visible: false,
+      files
     }
   }
 
   reduce(state, action) {
     switch(action.type) {
+      case Lat.START_LOAD:
+        const loadingFiles = state.files
+          .map(fname =>
+            api
+            .getFile(fname)
+            .catch(e => { debugger }))
+
+        const loaders = state.files
+          .map(fname => delayed(fname))
+
+        Promise.all(loadingFiles)
+          .spread((...buffers) =>
+            La.addItems(
+              buffers.map((buf, idx) =>
+                resolved(state.files[idx], Region.fromBuffer(buf)))))
+
+        loaders.forEach(l =>
+          state.library.loadingItems.add(l))
+
+        return Object.create(state)
+
       case Lat.ADD_ITEMS:
         action.items.forEach(i => state.library.addItem(i))
         return Object.create(state)

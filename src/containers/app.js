@@ -15,10 +15,14 @@ const getState = () => {
   const libState = LibStore.getState()
   const mixState = MixStore.getState()
 
+  // if (libState.library.size() === 0) {
+  //   LA.loadLibrary()
+  // }
+
   // TODO: i feel there is definitely a better way to handle this.
-  if (mixState.timelineSelected) {
-    LA.display()
-  }
+  // if (mixState.timelineSelected) {
+  //   LA.display()
+  // }
 
   const dh = Math.max(
     document.documentElement.clientHeight,
@@ -33,7 +37,7 @@ const getState = () => {
   const libraryProps = {
     items: libState.library.items,
     loading: libState.library.loadingItems,
-    visible: libState.visible,
+    visible: mixState.timelineSelected,
     onSampleClick: MA.addRegionToSelectedTimeline,
     onCoverClick: LA.hide,
   }
@@ -42,6 +46,7 @@ const getState = () => {
     timelines: mixState.mixer.timelines(),
     playing: mixState.mixer.playing(),
     timelineInView: mixState.timelineInView,
+    // timelineSelected: mixState.timelineSelected,
     onPlay: MA.play,
     onPause: MA.pause,
     onStop: MA.stop,

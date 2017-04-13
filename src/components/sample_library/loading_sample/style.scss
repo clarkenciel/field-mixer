@@ -1,2 +1,20 @@
 .loading-sample {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+
+  .icon {
+    flex-grow: 10;
+
+    img {
+      height: 4em;
+      width: 4em;
+    }
+  }
+
+  .name {
+    flex-grow: 90;
+  }
 }
