@@ -11,7 +11,9 @@
   .label {
     align-content: center;
     justify-content: center;
-    margin: 2vw;
+    margin: 1.0vw;
+    flex-grow: 1;
+    text-align: center;
 
     p {
       margin: 0;
