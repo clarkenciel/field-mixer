@@ -1,6 +1,5 @@
 .region-list {
   margin: 0;
-  /* margin-left: 10px; */
   padding: 0;
   padding-left: 1px;
   height: inherit;
@@ -9,17 +8,15 @@
   height: 100%;
 
   .regions-scroll-hide {
-    // margin-left: 10px;
     overflow: hidden;
     height: 80%;
     flex-grow: 100;
 
     .regions {
-      // flex-grow: 1;
-      // padding-right: -10px;
       height: 100%;
-      overflow-y: scroll;
-      overflow-x: hidden;
+      overflow: auto;
+      margin-right: -100px;
+      padding-right: 85px;
     }
   }
 
