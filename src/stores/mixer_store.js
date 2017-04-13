@@ -19,12 +19,13 @@ class MixerStore extends ReduceStore {
     return {
       mixer,
       timelineSelected: false,
-      selectedTimeline: -1
+      selectedTimeline: -1,
+      timelineInView: 0
     }
   }
 
   reduce(state, action) {
-    let tl
+    let tl, inView
     switch(action.type) {
       case Mat.APPEND_REGION:
         state.mixer.timeline(action.tlIdx).
@@ -96,6 +97,26 @@ class MixerStore extends ReduceStore {
           return Object.create(state)
         }
         else return state
+
+      case Mat.NEXT_TIMELINE:
+        inView = state.timelineInView
+        state.timelineInView = (inView + 1) % state.mixer.timelines().length
+        return Object.create(state)
+
+      case Mat.PREV_TIMELINE:
+        inView = state.timelineInView
+        const len = state.mixer.timelines().length
+        const prev = inView - 1
+        state.timelineInView = ((prev % len) + len) % len
+        return Object.create(state)
+
+      case Mat.SET_REGION_WAIT:
+        let { tlId, regId, val } = action
+        let tl = state.mixer.timeline(tlId)
+        if (val > 60) val = 60
+        if (val < 0) val = 0
+        tl.setRegionOffset(regId, val)
+        return Object.create(state)
 
       case Lat.HIDE:
         state.timelineSelected = false

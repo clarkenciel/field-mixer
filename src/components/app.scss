@@ -1,0 +1,11 @@
+* {
+  font-family: sans-serif;
+  font-size: 1.0rem;
+}
+
+@media only screen
+and (max-device-width: 736px) {
+  * {
+    font-size: 1.7rem;
+  }
+}

@@ -1,0 +1,25 @@
+#mixer-app {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: #efefef;
+  height: inherit;
+
+  .timeline-holder {
+    height: 88%;
+    // margin-bottom: 3%;
+    flex-grow: 100;
+  }
+
+  .control-holder {
+    // height: 10%;
+  }
+}
+
+@media only screen
+  and (max-device-width: 736px) {
+    #mixer-app {
+      margin-top: 2vh;
+      height: 95vh;
+    }
+}

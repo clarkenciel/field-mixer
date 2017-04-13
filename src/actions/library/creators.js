@@ -15,8 +15,13 @@ const hide = () => ({
   type: Lat.HIDE
 })
 
+const loadLibrary = () => ({
+  type: Lat.START_LOAD
+})
+
 export default {
   addItems,
   display,
-  hide
+  hide,
+  loadLibrary
 }

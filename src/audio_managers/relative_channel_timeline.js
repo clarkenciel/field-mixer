@@ -37,23 +37,27 @@ RelativeTimeline.insertAt = function(idx, region) {
 }
 
 RelativeTimeline.appendRegion = function(region) {
-  return this.insertAt(this._scheduledRegions.length, region)
+  this.insertAt(this._scheduledRegions.length, region)
+  this.adjustTimes(0)
+  return this
 }
 
 RelativeTimeline.prependRegion = function(region) {
-  return this.insertAt(0, region)
+  this.insertAt(0, region)
+  this.adjustTimes(0)
+  return this
 }
 
 // TODO: fix so that removing from head adjusts play times
 RelativeTimeline.removeAt = function(idx) {
   this.removeRegion(idx)
   this.removePlayer(idx)
-  this.adjustTimes()
   return this
 }
 
 RelativeTimeline.removeRegion = function(idx) {
   this.removeFromCollection('_scheduledRegions', idx)
+  if (idx < this._scheduledRegions.length) this.adjustTimes(idx)
   return this
 }
 
@@ -78,17 +82,24 @@ RelativeTimeline.removeFromCollection = function(name, idx) {
 }
 
 // TODO: build out so that scheduled regions don't have gaps
-RelativeTimeline.adjustTimes = function() {
+RelativeTimeline.adjustTimes = function(start) {
   if (this._scheduledRegions.length > 0) {
-    if (this._scheduledRegions[0].start === 0)
+    if (typeof start === 'undefined') start = 0
+    const startRegion = this._scheduledRegions[start]
+    const startOffset = startRegion.offsetMillis || 0
+    if (startRegion.start === 0 && startOffset === 0)
       return this
     else {
-      const first = this._scheduledRegions[0].start
       this._scheduledRegions = this._scheduledRegions
-        .map(sr => {
-          sr.start = sr.start - first
-          sr.end = sr.end - first
-        })
+        .slice(0, start+1)
+        .concat(this._scheduledRegions
+          .slice(start+1)
+          .map(sr => {
+            sr.start = sr.start + startRegion.start + startOffset
+            sr.end = sr.end + startRegion.start + startOffset
+            return sr
+          })
+        )
       return this
     }
   }
@@ -123,6 +134,12 @@ RelativeTimeline.getStartTimeAt = function(idx) {
   else {
     return 0
   }
+}
+
+RelativeTimeline.setRegionOffset = function(regId, val) {
+  this._scheduledRegions[regId].offset = val
+  this._scheduledRegions[regId].offsetMillis = val * 1000
+  this.adjustTimes(regId)
 }
 
 export default (context) => {

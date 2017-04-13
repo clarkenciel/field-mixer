@@ -7,10 +7,10 @@ import './style.scss'
 export default function(props) {
   return (
     <div className='loading-sample'>
-      <div>
-        <img src={ icon.default } style={{ height: '10%', width: '10%' }} />
+      <div className='icon'>
+        <img src={ icon.default } />
       </div>
-      <div>
+      <div className='name'>
         <p>{ props.name }</p>
       </div>
     </div>

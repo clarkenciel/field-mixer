@@ -73,6 +73,19 @@ const addRegionToSelectedTimeline = region => ({
   region
 })
 
+const nextTimeline = () => ({
+  type: Mat.NEXT_TIMELINE
+})
+
+const previousTimeline = () => ({
+  type: Mat.PREV_TIMELINE
+})
+
+const setRegionWait = (tlId, regId, val) => ({
+  type: Mat.SET_REGION_WAIT,
+  tlId, regId, val
+})
+
 export default {
   appendRegion,
   prependRegion,
@@ -91,5 +104,10 @@ export default {
   resume,
 
   setGain,
-  setPan
+  setPan,
+
+  nextTimeline,
+  previousTimeline,
+
+  setRegionWait,
 }

@@ -1,0 +1,26 @@
+.region-list {
+  margin: 0;
+  padding: 0;
+  padding-left: 1px;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .regions-scroll-hide {
+    overflow: hidden;
+    height: 80%;
+    flex-grow: 100;
+
+    .regions {
+      height: 100%;
+      overflow: auto;
+      margin-right: -100px;
+      padding-right: 85px;
+    }
+  }
+
+  .adder-holder {
+    flex-grow: 1;
+  }
+}

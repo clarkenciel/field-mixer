@@ -1,0 +1,36 @@
+.library-region {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: space-around;
+  padding-left: 4px;
+  background-color: #eeeeee;
+  border-top: 1px solid black;
+  cursor: pointer;
+
+  .region-filename {
+    margin: 0;
+    margin-left: 3px;
+    margin-right: 3px;
+    padding: 0;
+    padding-left: 7px;
+    padding-right: auto;
+  }
+
+  .region-duration {
+    margin: 0;
+    margin-left: 3px;
+    margin-right: 3px;
+    padding: 0;
+    padding-left: 7px;
+    padding-right: auto;
+  }
+}
+
+.library-region.selected {
+  background-color: blue;
+}
+
+.library-region:hover {
+  background-color: #aaaaaa;
+}

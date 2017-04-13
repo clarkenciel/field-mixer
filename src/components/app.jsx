@@ -3,11 +3,13 @@
 import React from 'react'
 import Mixer from './mixer/mixer.jsx'
 import Library from './sample_library/library.jsx'
+import LA from '../actions/library/dispatchers.js'
+import './app.scss'
 
 const style = props => ({
   width: '100%',
   height: '100%',
-  maxWidth: '900px',
+  maxWidth: '1000px',
   // height: props.dh,
   height: '100vh',
   margin: 'auto',
@@ -19,13 +21,14 @@ const mixerHolderStyle = props => ({
   height: '95%',
 })
 
-const libraryHolderStyle = props => ({
-  position: 'relative',
-  // height: props.dh * 0.2
-  height: '95%',
-})
-
 export default function(props) {
+  let { items, loading } = props.libraryProps
+
+  if (items.size() === 0 && loading.size() === 0) {
+    setTimeout(() => LA.loadLibrary(),
+      0)
+  }
+
   const lib = !props.libraryProps.visible ?
     null :
     <Library
