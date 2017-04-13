@@ -3,6 +3,7 @@
 import React from 'react'
 import Controls from './control_panel/control_panel.jsx'
 import RegionList from './region_list/region_list.jsx'
+import act from '../../../actions/mixer/dispatchers.js'
 import './timeline.scss'
 
 const style = props => ({
@@ -17,10 +18,28 @@ export default function(props) {
       style={ style(props) }
     >
       <div className='title-holder'>
+        <div
+          id='channel-nav-prev'
+          className='button-holder'
+          onClick={ act.previousTimeline }
+        >
+          <p> { '<' } </p>
+        </div>
+
         <div className='title'>
           <p>Channel: { props.id }</p>
         </div>
+
+        <div
+          id='channel-nav-next'
+          className='button-holder'
+          onClick={ act.nextTimeline }
+        >
+          <p> { '>' } </p>
+        </div>
       </div>
+
+
       <div className='controls-holder'>
         <Controls
           gain={ props.gain }

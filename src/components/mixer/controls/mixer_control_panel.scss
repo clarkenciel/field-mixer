@@ -28,29 +28,16 @@
     flex-grow: 2;
   }
 
-  #channel-nav-next,
-  #channel-nav-prev {
-    display: none;
-    background-color: #aaaaaa;
-    // width: 33%;
-    // margin: 0;
-    // margin-left: auto;
-    // margin-right: auto;
-  }
 
-  /* IPHONE */
-  /* Portrait */
-  @media only screen
-  and (max-device-width: 736px) {
-    #playback-control {
-      width: 33%;
-    }
+  // /* IPHONE */
+  // /* Portrait */
+  // @media only screen
+  // and (max-device-width: 736px) {
+  //   #playback-control {
+  //     width: 33%;
+  //   }
 
-    #channel-nav-next,
-    #channel-nav-prev {
-      display: flex;
-    }
-  }
+  // }
 }
 
 #mixer-controls.playing {

@@ -10,14 +10,48 @@
   flex-grow: 1;
 
   .title-holder {
-    background-color: #cccccc;
-    // font-weight: bold;
+    display: flex;
+    flex-direction: row;
     text-align: center;
+
+    .button-holder {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .title {
+      flex-grow: 2;
+      background-color: #cfcfcf;
+    }
+
+    #channel-nav-next,
+    #channel-nav-prev {
+      display: none;
+
+      background-color: #cacaca;
+
+      p {
+        margin: 0;
+        margin-top: 0.2vh;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-size: 100px;
+      }
+    }
+
+    @media only screen
+    and (max-device-width: 736px) {
+      #channel-nav-next,
+      #channel-nav-prev {
+        display: flex;
+      }
+    }
   }
 
   .controls-holder {
     display: flex;
-    background-color: #aaaaaa;
+    background-color: #cccccc;
     flex-direction: row;
     padding: 0;
     padding-top: 10px;
