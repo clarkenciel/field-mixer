@@ -25,7 +25,7 @@ export default function(props) {
       <div
         className='region-duration'
         style={ regionDurationStyle(props.columnWidth) }>
-        <p>{props.region.lengthSeconds()} sec.</p>
+        <p>{ Math.round(props.region.lengthSeconds()) } sec.</p>
       </div>
     </div>
   )

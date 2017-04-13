@@ -20,12 +20,6 @@ const mixerHolderStyle = props => ({
   height: '95%',
 })
 
-const libraryHolderStyle = props => ({
-  position: 'relative',
-  // height: props.dh * 0.2
-  height: '95%',
-})
-
 export default function(props) {
   const lib = !props.libraryProps.visible ?
     null :
