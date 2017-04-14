@@ -16,9 +16,14 @@ export default {
 
       request.onload = () => {
         const audioData = request.response
-        ctx.decodeAudioData(audioData,
-          buffer => resolve(buffer))
-          .catch(x => { console.log('FETCH ERROR [' + filename + ']: ', x); reject(x) })
+        ctx.decodeAudioData(
+          audioData,
+          buffer => resolve(buffer),
+          x => {
+            console.log('FETCH ERROR [' + filename + ']: ', x)
+            reject(x)
+          }
+        )
       }
 
       request.send()

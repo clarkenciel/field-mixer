@@ -15,25 +15,6 @@ const getState = () => {
   const libState = LibStore.getState()
   const mixState = MixStore.getState()
 
-  // if (libState.library.size() === 0) {
-  //   LA.loadLibrary()
-  // }
-
-  // TODO: i feel there is definitely a better way to handle this.
-  // if (mixState.timelineSelected) {
-  //   LA.display()
-  // }
-
-  const dh = Math.max(
-    document.documentElement.clientHeight,
-    window.innerHeight || 0
-  )
-
-  const dw = Math.max(
-    document.documentElement.clientWidth,
-    window.innerWidth || 0
-  )
-
   const libraryProps = {
     items: libState.library.items,
     loading: libState.library.loadingItems,
@@ -46,7 +27,6 @@ const getState = () => {
     timelines: mixState.mixer.timelines(),
     playing: mixState.mixer.playing(),
     timelineInView: mixState.timelineInView,
-    // timelineSelected: mixState.timelineSelected,
     onPlay: MA.play,
     onPause: MA.pause,
     onStop: MA.stop,
@@ -58,7 +38,6 @@ const getState = () => {
   }
 
   return {
-    dh, dw,
     libraryProps,
     mixerProps
   }

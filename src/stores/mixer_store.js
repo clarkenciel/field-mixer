@@ -33,7 +33,6 @@ class MixerStore extends ReduceStore {
         return Object.create(state)
 
       case Mat.PREPEND_REGION:
-
         state.mixer.timeline(action.tlIdx).
           prependRegion(action.region)
         return Object.create(state)
