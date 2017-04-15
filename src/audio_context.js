@@ -2,11 +2,11 @@
 
 
 let ctx
-if ('webkitAudioContext' in window) {
-  ctx = new webkitAudioContext()
-}
-else if ('AudioContext' in window) {
+if ('AudioContext' in window) {
   ctx = new AudioContext()
+}
+else if ('webkitAudioContext' in window) {
+  ctx = new webkitAudioContext()
 }
 
 export default ctx
