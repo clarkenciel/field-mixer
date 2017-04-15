@@ -1,10 +1,11 @@
 'use strict'
 
+
 let ctx
 if ('webkitAudioContext' in window) {
   ctx = new webkitAudioContext()
 }
-else {
+else if ('AudioContext' in window) {
   ctx = new AudioContext()
 }
 
