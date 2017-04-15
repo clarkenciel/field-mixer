@@ -18,6 +18,7 @@ try {
   )
 }
 catch (e) {
+  console.log(e)
   render(
     <Error header={ 'Web audio error' } message={ e.message }/>,
     document.getElementById('mixer')
