@@ -9,10 +9,10 @@ export default function(props) {
     <div className='timeline-region adder'
       onClick={ props.onClick }
     >
-      <div className='button'>
+      <div className='adder-button'>
         <img  src={plus.default} />
       </div>
-      <div className='text'>
+      <div className='adder-text'>
         <p>Add sound</p>
       </div>
     </div>

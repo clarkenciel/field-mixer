@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: row;
 
-  .button {
+  .adder-button {
     color: #aaffaa;
     padding: 0;
     padding-left: 1em;
@@ -19,6 +19,7 @@
     display: flex;
     align-content: center;
     justify-content: left;
+    height: 10vh;
 
     img {
       margin: auto;
@@ -27,8 +28,14 @@
     }
   }
 
-  .text {
+  .adder-text {
+    display: flex;
+    align-content: center;
+    justify-content: center;
     padding: 0;
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
     flex-grow: 1;
+    // height: 5vh;
   }
 }

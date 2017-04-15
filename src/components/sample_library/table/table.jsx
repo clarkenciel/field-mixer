@@ -6,7 +6,7 @@ import './table.scss'
 export default function(props) {
   return (
     <div
-      className='table'
+      className='sample-table'
     >
       { props.children }
     </div>

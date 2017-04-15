@@ -17,7 +17,7 @@ export default function(props) {
       className={ 'timeline' + (props.inView ? ' visible' : ' hidden') }
       style={ style(props) }
     >
-      <div className='title-holder'>
+      <div className='channel-title-holder'>
         <div
           id='channel-nav-prev'
           className='button-holder'
@@ -26,7 +26,7 @@ export default function(props) {
           <p> { '<' } </p>
         </div>
 
-        <div className='title'>
+        <div className='channel-title'>
           <p>Channel: { props.id }</p>
         </div>
 

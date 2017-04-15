@@ -9,26 +9,28 @@
   flex-direction: column;
   flex-grow: 1;
 
-  .title-holder {
+  .channel-title-holder {
     display: flex;
     flex-direction: row;
     text-align: center;
+    height: 7vh;
 
     .button-holder {
       flex-grow: 1;
       text-align: center;
     }
 
-    .title {
+    .channel-title {
       flex-grow: 2;
-      background-color: #cfcfcf;
+      background-color: #cbbaff;
+      padding-top: 1vh;
     }
 
     #channel-nav-next,
     #channel-nav-prev {
       display: none;
 
-      background-color: #cacaca;
+      background-color: #cbbaff;
 
       p {
         margin: 0;
@@ -51,13 +53,14 @@
 
   .controls-holder {
     display: flex;
-    background-color: #cccccc;
+    background-color: #cbbaff;
     flex-direction: row;
     padding: 0;
-    padding-top: 10px;
-    padding-left: 10px;
+    // padding-top: 10px;
+    // padding-left: 10px;
     padding-right: 10px;
-    padding-bottom: 6vh;
+    padding-bottom: 1vh;
+    // height: 250px;
   }
 
   .region-list-holder {

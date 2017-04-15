@@ -12,7 +12,7 @@
   }
 
   .control-holder {
-    // height: 10%;
+    height: 10vh;
   }
 }
 
@@ -20,6 +20,6 @@
   and (max-device-width: 736px) {
     #mixer-app {
       margin-top: 2vh;
-      height: 95vh;
+      // height: 95vh;
     }
 }
