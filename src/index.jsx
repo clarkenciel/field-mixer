@@ -9,7 +9,7 @@ import spn from 'stereo-panner-node'
 
 try {
   spn.polyfill()
-  if (!('webkitAudioContext' in window) || !('AudioContext' in window)) {
+  if (!('webkitAudioContext' in window) && !('AudioContext' in window)) {
     throw(Error('Your browser does not support web audio please try on an up-to-date version of Chrome, Firefox, or Safari'))
   }
   render(
