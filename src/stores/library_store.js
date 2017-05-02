@@ -33,50 +33,58 @@ class LibraryStore extends ReduceStore {
     ]
 
 
-    return {
-      library: Library([], []),
-      visible: false,
-      files
+    return {      
+      library: null,
+      visible: false
     }
   }
 
   reduce(state, action) {
     switch(action.type) {
-      case Lat.START_LOAD:
-        const loadingFiles = state.files
-          .map(fname =>
-            api
-            .getFile(fname)
-            .catch(e => { debugger }))
+    case Lat.FETCH_FILES:
+      state.fileRequest = api.getFileList()
+      	.then(La.loadLibrary)
+      	.catch(error => {
+      	  console.log("File list get error: ", error)
+      	})
 
-        const loaders = state.files
-          .map(fname => delayed(fname))
+      state.library = Library([], [])
+      return Object.create(state)
+      
+    case Lat.START_LOAD:      
+      const loadingFiles = action.fileList
+        .map(fname =>
+             api
+             .getFile(fname)
+             .catch(console.log))
 
-        Promise.all(loadingFiles)
-          .spread((...buffers) =>
-            La.addItems(
-              buffers.map((buf, idx) =>
-                resolved(state.files[idx], Region.fromBuffer(buf)))))
+      const loaders = action.fileList
+            .map(fname => delayed(fname))
 
-        loaders.forEach(l =>
-          state.library.loadingItems.add(l))
+      state.fileRequest = Promise.all(loadingFiles)
+        .spread((...buffers) =>
+		La.addItems(
+		  buffers.map((buf, idx) =>
+			      resolved(action.fileList[idx], Region.fromBuffer(buf)))))
 
-        return Object.create(state)
+      loaders.forEach(l => state.library.loadingItems.add(l))
 
-      case Lat.ADD_ITEMS:
-        action.items.forEach(i => state.library.addItem(i))
-        return Object.create(state)
+      return Object.create(state)
 
-      case Lat.DISPLAY:
-        state.visible = true
-        return Object.create(state)
+    case Lat.ADD_ITEMS:
+      action.items.forEach(i => state.library.addItem(i))
+      return Object.create(state)
 
-      case Lat.HIDE:
-        state.visible = false
-        return Object.create(state)
+    case Lat.DISPLAY:
+      state.visible = true
+      return Object.create(state)
 
-      default:
-        return state
+    case Lat.HIDE:
+      state.visible = false
+      return Object.create(state)
+
+    default:
+      return state
     }
   }
 }

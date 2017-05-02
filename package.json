@@ -10,7 +10,8 @@
     "build": "NODE_ENV=production webpack --progress -p --config webpack.prod.js",
     "dev": "NODE_ENV=develop node server.js",
     "test": "jest",
-    "repl": "node"
+    "repl": "node",
+    "test-serve": "node test_server.js"
   },
   "jest": {
     "modulePathIgnorePatterns": [

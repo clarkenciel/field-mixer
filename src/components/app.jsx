@@ -20,33 +20,37 @@ const mixerHolderStyle = props => ({
 })
 
 export default function(props) {
-  let { items, loading } = props.libraryProps
-
-  if (items.size() === 0 && loading.size() === 0) {
-    setTimeout(() => LA.loadLibrary(),
-      0)
+  const { library } = props.libraryProps
+  
+  if (!library) {
+    window.setTimeout(
+      LA.getFiles,
+      0
+    )
   }
-
+  
   const lib = !props.libraryProps.visible ?
-    null :
-    <Library
-      columnWidth={ '50%' }
-      { ...props.libraryProps }
+	null :
+	<Library
+  columnWidth={ '50%' }
+  loading={ library ? library.loadingItems : [] }
+  items={ library ? library.items : [] }
+  { ...props.libraryProps }
     />
 
   return (
     <div
       id='app-contents'
       style={ style(props) }
-    >
+      >
       { lib }
       <div id='mixer-holder'
-        style={ mixerHolderStyle(props) }
-      >
+           style={ mixerHolderStyle(props) }
+	   >
         <Mixer
           { ...props.mixerProps }
-        />
+          />
       </div>
     </div>
-    )
+  )
 }

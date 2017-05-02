@@ -15,13 +15,19 @@ const hide = () => ({
   type: Lat.HIDE
 })
 
-const loadLibrary = () => ({
-  type: Lat.START_LOAD
+const loadLibrary = fileList => ({
+  type: Lat.START_LOAD,
+  fileList
+})
+
+const getFiles = () => ({
+  type: Lat.FETCH_FILES
 })
 
 export default {
   addItems,
   display,
   hide,
-  loadLibrary
+  loadLibrary,
+  getFiles
 }

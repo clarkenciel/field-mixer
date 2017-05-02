@@ -22,7 +22,8 @@ const LibraryActionTypes = {
   ADD_ITEMS: 'library/add-items',
   DISPLAY: 'library/display',
   HIDE: 'library/hide',
-  START_LOAD: 'library/start-load'
+  START_LOAD: 'library/start-load',
+  FETCH_FILES: 'library/fetch-files'
 }
 
 export {

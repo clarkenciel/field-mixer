@@ -16,8 +16,7 @@ const getState = () => {
   const mixState = MixStore.getState()
 
   const libraryProps = {
-    items: libState.library.items,
-    loading: libState.library.loadingItems,
+    library: libState.library,
     visible: mixState.timelineSelected,
     onSampleClick: MA.addRegionToSelectedTimeline,
     onCoverClick: LA.hide,

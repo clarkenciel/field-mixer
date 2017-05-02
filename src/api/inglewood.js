@@ -4,9 +4,23 @@ import { Promise } from 'bluebird'
 import La from '../actions/library/dispatchers.js'
 import ctx from '../audio_context.js'
 
-const host = 'https://mbalvanera.github.io/wouldinglewood.github.io/audio/'
+const host = 'audio/'
 
 export default {
+  getFileList() {
+    return new Promise((resolve, reject) => {
+      const request = new XMLHttpRequest
+
+      request.open('GET', host + 'list.txt', true)
+
+      request.onload = () => {
+	resolve(request.response.split('\n').filter(x => x.length > 0))
+      }
+
+      request.send()
+    })
+  },
+  
   getFile(filename) {
     return new Promise((resolve, reject) => {
       const request = new XMLHttpRequest

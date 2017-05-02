@@ -20,6 +20,7 @@ if (isDeveloping) {
 
   app.use(middleware)
   app.use(webpackHotMW(compiler))
+  app.use(express.static('.'))
 
   app.get('*', (req, res) => {
     res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'build', 'index.html')))
